@@ -31,7 +31,7 @@ fassung: aufgaben
 |---|---|---:|---:|
 | A | Theorie (MC) | 3 | 5 Min |
 | B | EERM, Normalisierung, Anomalien | 14 | 25 Min |
-| C | SQL-Abfragen über viele Tabellen | 14 | 25 Min |
+| C | SQL-Abfragen ueber mehrere Tabellen | 14 | 25 Min |
 | D | Grundlagen Programmierung (Struktogramm) | 3 | 5 Min |
 | **Gesamt** |  | **34** | **60 Min** |
 
@@ -77,13 +77,13 @@ Nennen Sie je ein Beispiel:
 
 ---
 
-## Teil C (14 Punkte): SQL-Abfragen über viele Tabellen
+## Teil C (14 Punkte): SQL-Abfragen ueber mehrere Tabellen
 
 **Separater SQL-Kontext (3NF, Kontext 2) – anderen Kontext als Modellierung:**
 Für Teil C wird absichtlich ein anderen Kontext verwendet als in Teil B (Kontext 1), damit die Modellierungslösung aus Teil B nicht indirekt vorgegeben wird.
 
 **Konkreter Sachverhalt:**
-Ein Foodtruck-Netzwerk verwaltet Kundinnen und Kunden, Trucks, Standorte, Produkte, Bestellungen, Positionen, Schichten und Zahlungen.
+Ein Foodtruck-Netzwerk verwaltet Kundinnen und Kunden, Trucks, Standorte, Produkte, Bestellungen und Zahlungen (6 Entitaetstypen).
 
 **Arbeitsgrundlage:**
 - SQL-Struktur: `foodtrucknetz_struktur_2025.sql`
@@ -103,7 +103,7 @@ Ermitteln Sie je Kundin/Kunde die Anzahl abgeschlossener Bestellungen. Zeigen Si
 Geben Sie pro Standort den letzten Bestellzeitpunkt und die Anzahl unterschiedlicher Kundinnen/Kunden aus.
 
 ### Aufgabe 4.4 (3 Punkte)
-Finden Sie Mitarbeitende ohne Schichtzuweisung (LEFT JOIN).
+Finden Sie Produkte ohne Bestellung (LEFT JOIN).
 
 ---
 

@@ -14,7 +14,7 @@ def markdown_to_html(md_file, html_file):
     
     html_content = markdown.markdown(md_content, extensions=['tables', 'extra'])
     
-    # Wrap mit HTML-Template
+    # Wrap mit HTML-Template (A4-druckoptimiert)
     full_html = f"""<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -22,29 +22,46 @@ def markdown_to_html(md_file, html_file):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muster-Klassenarbeit: Relationale Datenbanken</title>
     <style>
+        @page {{
+            size: A4 portrait;
+            margin: 12mm;
+        }}
+        html, body {{
+            padding: 0;
+        }}
         body {{
             font-family: 'Calibri', 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 2cm;
-            color: #333;
+            line-height: 1.45;
+            margin: 0 auto;
+            max-width: 186mm;
+            color: #222;
+            font-size: 11pt;
         }}
         h1, h2, h3, h4 {{
             color: #1a5f8f;
             margin-top: 1em;
             margin-bottom: 0.5em;
+            page-break-after: avoid;
         }}
-        h1 {{ font-size: 24pt; border-bottom: 3px solid #1a5f8f; padding-bottom: 0.5em; }}
-        h2 {{ font-size: 18pt; }}
-        h3 {{ font-size: 14pt; }}
+        h1 {{ font-size: 20pt; border-bottom: 3px solid #1a5f8f; padding-bottom: 0.35em; }}
+        h2 {{ font-size: 15pt; }}
+        h3 {{ font-size: 12.5pt; }}
+        p, li {{
+            orphans: 3;
+            widows: 3;
+        }}
         table {{
             border-collapse: collapse;
             width: 100%;
             margin: 1em 0;
+            page-break-inside: avoid;
         }}
         table th, table td {{
             border: 1px solid #ddd;
-            padding: 0.5em;
+            padding: 0.4em 0.45em;
             text-align: left;
+            vertical-align: top;
+            font-size: 10.5pt;
         }}
         table th {{
             background-color: #e8f1f7;
@@ -72,6 +89,27 @@ def markdown_to_html(md_file, html_file):
         }}
         .hint {{ border-left-color: #ffa500; background-color: #fffaf0; }}
         .warning {{ border-left-color: #ff6b6b; background-color: #ffe0e0; }}
+        img {{
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0.6em auto;
+            border: 1px solid #d3dbe8;
+            border-radius: 6px;
+            page-break-inside: avoid;
+        }}
+        @media print {{
+            body {{
+                max-width: none;
+                margin: 0;
+            }}
+            pre, blockquote, table, img {{
+                page-break-inside: avoid;
+            }}
+            h2, h3 {{
+                break-after: avoid-page;
+            }}
+        }}
     </style>
 </head>
 <body>

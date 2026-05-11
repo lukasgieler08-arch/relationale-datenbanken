@@ -117,8 +117,15 @@ class SqlSchemaParser:
 class SchemaDiagramRenderer:
     """Renders readable entity-relationship diagrams from parsed SQL schema."""
 
-    def __init__(self, strict_plus: bool = False) -> None:
+    def __init__(
+        self,
+        strict_plus: bool = False,
+        a4_portrait: bool = False,
+        max_columns: int = 2,
+    ) -> None:
         self._strict_plus = strict_plus
+        self._a4_portrait = a4_portrait
+        self._max_columns = max(1, max_columns)
         self._title_font = self._load_font(26, bold=True)
         self._header_font = self._load_font(20, bold=True)
         self._text_font = self._load_font(16)
@@ -131,15 +138,24 @@ class SchemaDiagramRenderer:
 
         levels = self._compute_levels(tables, fks)
         rows_by_level = self._order_rows_by_dependencies(tables, fks, levels)
+        if self._a4_portrait:
+            rows_by_level = self._rebalance_rows_for_portrait_print(rows_by_level)
+
         row_count = len(rows_by_level)
         col_count = max(len(row) for row in rows_by_level.values())
 
-        card_w = 500 if self._strict_plus else 480
+        card_w = 440 if self._a4_portrait else (500 if self._strict_plus else 480)
         card_h_max = max(180, 80 + 24 * min(10, max(len(t.columns) for t in tables)))
-        gap_x = 110 if self._strict_plus else 70
-        gap_y = 100 if self._strict_plus else 60
-        pad_x = 90 if self._strict_plus else 70
-        pad_y = 110 if self._strict_plus else 90
+        if self._a4_portrait:
+            gap_x = 54
+            gap_y = 74
+            pad_x = 52
+            pad_y = 96
+        else:
+            gap_x = 110 if self._strict_plus else 70
+            gap_y = 100 if self._strict_plus else 60
+            pad_x = 90 if self._strict_plus else 70
+            pad_y = 110 if self._strict_plus else 90
 
         width = pad_x * 2 + col_count * card_w + (col_count - 1) * gap_x
         height = pad_y * 2 + row_count * card_h_max + (row_count - 1) * gap_y + 120
@@ -357,6 +373,21 @@ class SchemaDiagramRenderer:
                 break
 
         return rows
+
+    def _rebalance_rows_for_portrait_print(self, rows: dict[int, list[str]]) -> dict[int, list[str]]:
+        """Split broad rows into smaller chunks for A4 portrait readability.
+
+        This keeps the general level order but caps side-by-side entity cards,
+        so entity types appear more often under each other than next to each other.
+        """
+        rebalanced: dict[int, list[str]] = {}
+        new_level = 0
+        for level in sorted(rows.keys()):
+            current = rows[level]
+            for idx in range(0, len(current), self._max_columns):
+                rebalanced[new_level] = current[idx : idx + self._max_columns]
+                new_level += 1
+        return rebalanced
 
     def _crossing_score(
         self,
@@ -770,6 +801,17 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Use a wider, more collision-averse layout with stronger spacing",
     )
+    parser.add_argument(
+        "--a4-portrait",
+        action="store_true",
+        help="Optimize diagram layout for A4 portrait printing (more vertical stacking)",
+    )
+    parser.add_argument(
+        "--max-columns",
+        type=int,
+        default=2,
+        help="Maximum number of entity cards side-by-side in A4 portrait mode",
+    )
     return parser.parse_args()
 
 
@@ -785,7 +827,11 @@ def main() -> int:
         return 0
 
     sql_parser = SqlSchemaParser()
-    renderer = SchemaDiagramRenderer(strict_plus=args.strict_plus)
+    renderer = SchemaDiagramRenderer(
+        strict_plus=args.strict_plus,
+        a4_portrait=args.a4_portrait,
+        max_columns=args.max_columns,
+    )
 
     for struktur_file in struktur_files:
         daten_file = find_daten_file(struktur_file)

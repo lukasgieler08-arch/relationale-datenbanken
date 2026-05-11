@@ -24,6 +24,17 @@ check_mwb_container() {
   fi
 }
 
+check_max_entity_types() {
+  local sql_file="$1"
+  local max_entities=6
+  local entity_count
+  entity_count=$(grep -cE '^\s*CREATE\s+TABLE\s+' "$sql_file" || true)
+
+  if [[ "$entity_count" -gt "$max_entities" ]]; then
+    note_fail "$sql_file: zu viele Entitaetstypen ($entity_count > $max_entities)"
+  fi
+}
+
 check_md_html_pairs() {
   local dir="generated/klassenarbeiten"
 
@@ -82,6 +93,7 @@ for md in generated/klassenarbeiten/*_lsg.md; do
 
   [[ -n "$sql_dump" ]] && check_file_exists "$sql_dump"
   [[ -n "$sql_data" ]] && check_file_exists "$sql_data"
+  [[ -n "$sql_dump" ]] && [[ -f "$sql_dump" ]] && check_max_entity_types "$sql_dump"
   [[ -n "$model_part_b" ]] && check_file_exists "$model_part_b"
   [[ -n "$sql_model" ]] && check_file_exists "$sql_model"
   [[ -n "$model_part_b" ]] && [[ -f "$model_part_b" ]] && check_mwb_container "$model_part_b"

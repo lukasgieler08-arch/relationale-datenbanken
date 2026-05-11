@@ -5,29 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muster-Klassenarbeit: Relationale Datenbanken</title>
     <style>
+        @page {
+            size: A4 portrait;
+            margin: 12mm;
+        }
+        html, body {
+            padding: 0;
+        }
         body {
             font-family: 'Calibri', 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 2cm;
-            color: #333;
+            line-height: 1.45;
+            margin: 0 auto;
+            max-width: 186mm;
+            color: #222;
+            font-size: 11pt;
         }
         h1, h2, h3, h4 {
             color: #1a5f8f;
             margin-top: 1em;
             margin-bottom: 0.5em;
+            page-break-after: avoid;
         }
-        h1 { font-size: 24pt; border-bottom: 3px solid #1a5f8f; padding-bottom: 0.5em; }
-        h2 { font-size: 18pt; }
-        h3 { font-size: 14pt; }
+        h1 { font-size: 20pt; border-bottom: 3px solid #1a5f8f; padding-bottom: 0.35em; }
+        h2 { font-size: 15pt; }
+        h3 { font-size: 12.5pt; }
+        p, li {
+            orphans: 3;
+            widows: 3;
+        }
         table {
             border-collapse: collapse;
             width: 100%;
             margin: 1em 0;
+            page-break-inside: avoid;
         }
         table th, table td {
             border: 1px solid #ddd;
-            padding: 0.5em;
+            padding: 0.4em 0.45em;
             text-align: left;
+            vertical-align: top;
+            font-size: 10.5pt;
         }
         table th {
             background-color: #e8f1f7;
@@ -55,6 +72,27 @@
         }
         .hint { border-left-color: #ffa500; background-color: #fffaf0; }
         .warning { border-left-color: #ff6b6b; background-color: #ffe0e0; }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0.6em auto;
+            border: 1px solid #d3dbe8;
+            border-radius: 6px;
+            page-break-inside: avoid;
+        }
+        @media print {
+            body {
+                max-width: none;
+                margin: 0;
+            }
+            pre, blockquote, table, img {
+                page-break-inside: avoid;
+            }
+            h2, h3 {
+                break-after: avoid-page;
+            }
+        }
     </style>
 </head>
 <body>
@@ -109,7 +147,7 @@ fassung: loesung</p>
 </tr>
 <tr>
 <td>C</td>
-<td>SQL-Abfragen über viele Tabellen</td>
+<td>SQL-Abfragen ueber mehrere Tabellen</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">25 Min</td>
 </tr>
@@ -152,7 +190,7 @@ fassung: loesung</p>
 - Änderungsanomalie: Raumbezeichnung muss in mehreren Zeilen geändert werden.
 - Löschanomalie: Letzter Slot gelöscht, Gerätedaten gehen verloren.</p>
 <hr />
-<h2>Teil C (14 Punkte): SQL-Abfragen über viele Tabellen</h2>
+<h2>Teil C (14 Punkte): SQL-Abfragen ueber mehrere Tabellen</h2>
 <p><strong>Separater SQL-Kontext (3NF, Kontext 2) – anderen Kontext als Modellierung:</strong>
 Für Teil C wird absichtlich ein anderen Kontext verwendet als in Teil B (Kontext 1), damit die Modellierungslösung aus Teil B nicht indirekt vorgegeben wird.</p>
 <p><strong>Arbeitsgrundlage:</strong>
@@ -166,13 +204,12 @@ Für Teil C wird absichtlich ein anderen Kontext verwendet als in Teil B (Kontex
   k.vorname,
   a.platzcode,
   s.bezeichnung AS standort,
-  t.tarifname,
+  a.tarifname,
   z.betrag
 FROM buchungen b
 JOIN kunden k ON b.kunde_id = k.kunde_id
 JOIN arbeitsplaetze a ON b.platz_id = a.platz_id
 JOIN standorte s ON a.standort_id = s.standort_id
-JOIN tarifmodelle t ON a.tarif_id = t.tarif_id
 JOIN zahlungen z ON b.buchung_id = z.buchung_id
 WHERE b.status = 'abgeschlossen'
 ORDER BY k.nachname, b.startzeit;
@@ -200,9 +237,9 @@ GROUP BY s.standort_id, s.bezeichnung;
 </code></pre>
 <p><strong>Bewertung:</strong> MAX 1 Pkt | COUNT DISTINCT 1 Pkt | GROUP BY 1 Pkt</p>
 <h3>Aufgabe 4.4 (3 Punkte) – Musterlösung</h3>
-<pre><code class="language-sql">SELECT bt.betreuer_id, bt.vorname, bt.nachname, bt.rolle
-FROM betreuende bt
-LEFT JOIN supporttickets st ON bt.betreuer_id = st.betreuer_id
+<pre><code class="language-sql">SELECT k.kunde_id, k.vorname, k.nachname
+FROM kunden k
+LEFT JOIN supporttickets st ON k.kunde_id = st.kunde_id
 WHERE st.ticket_id IS NULL;
 </code></pre>
 <p><strong>Bewertung:</strong> LEFT JOIN 1,5 Pkt | IS NULL 1,5 Pkt</p>

@@ -33,7 +33,7 @@ fassung: loesung
 |---|---|---:|---:|
 | A | Theorie (MC) | 3 | 5 Min |
 | B | EERM, Normalisierung, Anomalien | 14 | 25 Min |
-| C | SQL-Abfragen über viele Tabellen | 14 | 25 Min |
+| C | SQL-Abfragen über mehrere Tabellen | 14 | 25 Min |
 | D | Grundlagen Programmierung (Struktogramm) | 3 | 5 Min |
 | **Gesamt** |  | **34** | **60 Min** |
 
@@ -97,14 +97,14 @@ Eine Bildungseinrichtung betreibt eine Kursplattform. Teilnehmende buchen Kurse 
 
 ---
 
-## Teil C (14 Punkte): SQL-Abfragen über viele Tabellen
+## Teil C (14 Punkte): SQL-Abfragen über mehrere Tabellen
 
 **Separater SQL-Kontext (3NF, Kontext 2) – anderen Kontext als Modellierung:**
 Für Teil C wird absichtlich einen anderen Kontext verwendet als in Teil B (Kontext 1), damit die Modellierungsloesung aus Teil B nicht indirekt vorgegeben wird.
 Die didaktische Trennung ist essentiell für die Unabhaengigkeit der Aufgabenteile.
 
 **Konkreter Sachverhalt:**
-Ein kommunaler Stadtfahrradverleih verwaltet Kundinnen und Kunden, Stationen, Fahrradtypen, einzelne Fahrraeder, Ausleihen, Zahlungen und Wartungen. Die bereitgestellte Uebungsdatenbank ist bereits in 3NF modelliert.
+Ein kommunaler Stadtfahrradverleih verwaltet Kundinnen und Kunden, Stationen, Fahrraeder, Ausleihen, Zahlungen und Wartungen (6 Entitaetstypen). Die bereitgestellte Uebungsdatenbank ist bereits in 3NF modelliert.
 
 **Arbeitsgrundlage:**
 - SQL-Struktur: `stadtfahrradverleih_struktur_2025.sql`
@@ -121,14 +121,13 @@ Geben Sie für jede abgeschlossene Ausleihe den Kundennamen, die Fahrradnummer, 
 SELECT
   k.nachname, k.vorname,
   f.fahrrad_id,
-  ft.typname,
+  f.typname,
   s1.stationsname AS startstation,
   s2.stationsname AS zielstation,
   z.betrag
 FROM ausleihen a
 JOIN kunden k ON a.kunde_id = k.kunde_id
 JOIN fahrraeder f ON a.fahrrad_id = f.fahrrad_id
-JOIN fahrradtypen ft ON f.typ_id = ft.typ_id
 JOIN stationen s1 ON a.start_station_id = s1.station_id
 JOIN stationen s2 ON a.ziel_station_id = s2.station_id
 JOIN zahlungen z ON a.ausleihe_id = z.ausleihe_id
@@ -168,13 +167,13 @@ GROUP BY s.station_id, s.stationsname;
 **Bewertung:** MAX korrekt 1 Pkt | COUNT DISTINCT 1 Pkt | GROUP BY korrekt 1 Pkt
 
 ### Aufgabe 4.4 (3 Punkte)
-Finden Sie Mitarbeitende ohne dokumentierte Wartung (LEFT JOIN).
+Finden Sie Fahrraeder ohne dokumentierte Wartung (LEFT JOIN).
 
 **Musterloesung:**
 ```sql
-SELECT m.mitarbeiter_id, m.vorname, m.nachname, m.rolle
-FROM mitarbeitende m
-LEFT JOIN wartungen w ON m.mitarbeiter_id = w.mitarbeiter_id
+SELECT f.fahrrad_id, f.typname, f.seriennummer
+FROM fahrraeder f
+LEFT JOIN wartungen w ON f.fahrrad_id = w.fahrrad_id
 WHERE w.wartung_id IS NULL;
 ```
 **Bewertung:** LEFT JOIN korrekt 1,5 Pkt | IS NULL Bedingung korrekt 1,5 Pkt
@@ -217,7 +216,7 @@ ENDE
 Aufgabe 1: r, f, r, r, f, r
 
 Loesungshinweise Teil C:
-- 4.1 benoetigt JOIN über mindestens: ausleihen, kunden, fahrraeder, fahrradtypen, stationen (2x), zahlungen
+- 4.1 benoetigt JOIN über mindestens: ausleihen, kunden, fahrraeder, stationen (2x), zahlungen
 - 4.2 benoetigt GROUP BY/HAVING auf kunden + ausleihen
 - 4.3 benoetigt Aggregation pro station + MAX(startzeit)
-- 4.4 benoetigt LEFT JOIN mitarbeitende -> wartungen und IS NULL
+- 4.4 benoetigt LEFT JOIN fahrraeder -> wartungen und IS NULL

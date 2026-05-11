@@ -155,6 +155,29 @@ Hinweis:
 - Der Generator rendert die PNG aus dem SQL-Dump (Tabellen + FK-Beziehungen).
 - Die native Designerbearbeitung erfolgt weiterhin ueber die `.mwb`-Datei in MySQL Workbench.
 
+### Schritt 5b: Echte Workbench-Modelle (.mwb mit document.mwb.xml) aus SQL erzeugen
+
+```bash
+# Bereitet pro SQL-Paar ein eigenes Schema vor und erstellt einen Workbench-Leitfaden
+bash scripts/prepare-workbench-mwb.sh
+```
+
+Ergebnis:
+- Die SQL-Paare `*_struktur_*.sql` und `*_daten_*.sql` werden in getrennte Datenbankschemata geladen.
+- Es wird `generated/klassenarbeiten/WORKBENCH-MWB-WORKFLOW.md` erzeugt.
+- In dieser Datei steht pro System:
+   - welches Schema in Workbench reverse engineered wird,
+   - welcher Zielpfad fuer die echte `.mwb` zu verwenden ist.
+
+Wichtig:
+- Ein nativer Workbench-Container enthaelt intern `document.mwb.xml`.
+- Platzhalterdateien sind fuer Aufgaben/Loesungen nicht zulaessig.
+- Nach dem Speichern in Workbench immer strikt pruefen:
+
+```bash
+bash scripts/validate-mwb-native.sh
+```
+
 ### Schritt 5a: PNG-Referenz in generierte Markdown-Datei einbetten
 
 ```bash

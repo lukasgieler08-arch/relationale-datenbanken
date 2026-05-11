@@ -31,7 +31,7 @@ fassung: aufgaben
 |---|---|---:|---:|
 | A | Theorie (MC) | 3 | 5 Min |
 | B | EERM, Normalisierung, Anomalien | 14 | 25 Min |
-| C | SQL-Abfragen über viele Tabellen | 14 | 25 Min |
+| C | SQL-Abfragen ueber mehrere Tabellen | 14 | 25 Min |
 | D | Grundlagen Programmierung (Struktogramm) | 3 | 5 Min |
 | **Gesamt** |  | **34** | **60 Min** |
 
@@ -77,14 +77,14 @@ Nennen Sie je ein Beispiel:
 
 ---
 
-## Teil C (14 Punkte): SQL-Abfragen über viele Tabellen
+## Teil C (14 Punkte): SQL-Abfragen ueber mehrere Tabellen
 
 **Separater SQL-Kontext (3NF, Kontext 2) – anderen Kontext als Modellierung:**
 Fuer Teil C wird absichtlich einen anderen Kontext verwendet als in Teil B (Kontext 1), damit die Modellierungsloesung aus Teil B nicht indirekt vorgegeben wird.
 Die didaktische Trennung ist essentiell fuer die Unabhaengigkeit der Aufgabenteile.
 
 **Konkreter Sachverhalt:**
-Ein kommunaler Stadtfahrradverleih verwaltet Kundinnen und Kunden, Stationen, Fahrradtypen, einzelne Fahrraeder, Ausleihen, Zahlungen und Wartungen. Die bereitgestellte Uebungsdatenbank ist bereits in 3NF modelliert.
+Ein kommunaler Stadtfahrradverleih verwaltet Kundinnen und Kunden, Stationen, Fahrraeder, Ausleihen, Zahlungen und Wartungen (6 Entitaetstypen). Die bereitgestellte Uebungsdatenbank ist bereits in 3NF modelliert.
 
 **Arbeitsgrundlage:**
 - SQL-Struktur: `stadtfahrradverleih_struktur_2025.sql`
@@ -104,7 +104,7 @@ Ermitteln Sie je Kundin/Kunde die Anzahl abgeschlossener Ausleihen. Zeigen Sie n
 Geben Sie pro Station den letzten Ausleihstart und die Anzahl unterschiedlicher Kundinnen/Kunden aus, die dort gestartet sind.
 
 ### Aufgabe 4.4 (3 Punkte)
-Finden Sie Mitarbeitende ohne dokumentierte Wartung (LEFT JOIN).
+Finden Sie Fahrraeder ohne dokumentierte Wartung (LEFT JOIN).
 
 ---
 

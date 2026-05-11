@@ -21,7 +21,7 @@ Sicherstellen, dass Modellierungsaufgaben (Teil B) und SQL-Abfragen (Teil C) did
    - Keine fertige Tabellenstruktur fuer Schueler ausgeben.
 2. Teil-C-Kontext festlegen.
    - Andere Domaine als Teil B verwenden.
-   - Konkreten Sachverhalt mit mehreren Entitaeten und Beziehungen definieren.
+   - Konkreten Sachverhalt mit 5 bis maximal 6 Entitaetstypen und klaren Beziehungen definieren.
 3. SQL-Datenbank in 3NF erstellen.
    - Struktur in eigener Datei dokumentieren: `{Systemname}_struktur_{Jahr}.sql`.
    - Daten in eigener Datei dokumentieren: `{Systemname}_daten_{Jahr}.sql`.
@@ -42,7 +42,8 @@ Sicherstellen, dass Modellierungsaufgaben (Teil B) und SQL-Abfragen (Teil C) did
 ## Erfolgskriterien
 - Teil B und Teil C sind unterschiedliche Kontexte.
 - SQL-Teil C liegt getrennt vor als Struktur- und Daten-Datei.
-- SQLDB-EERM (.mwb) als gueltiger Modellcontainer vorhanden.
+- SQL-Struktur Teil C hat 5 bis maximal 6 Entitaetstypen.
+- SQLDB-EERM (.mwb) ist ein natives Workbench-Modell (enthaelt `document.mwb.xml`, keine Platzhalterdatei).
 - Wenn Workbench verfuegbar: SQLDB-EERM-Grafik (.png) vorhanden.
 - KA-Markdown (`*_aufg.md`, `*_lsg.md`) haben jeweils einen zugehoerigen HTML-Export.
 - Pflicht-Gates laufen ohne Fehler durch.

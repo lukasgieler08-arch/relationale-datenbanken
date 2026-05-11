@@ -45,6 +45,8 @@ Optional:
 ```bash
 python3 scripts/plugins/eerm_grafik_generator/generate_eerm_png.py \
   --input-dir generated/klassenarbeiten \
+  --a4-portrait \
+  --max-columns 2 \
   --force
 ```
 
@@ -53,6 +55,7 @@ python3 scripts/plugins/eerm_grafik_generator/generate_eerm_png.py \
 - Sucht rekursiv nach `*_struktur_*.sql`
 - Prueft zu jeder Strukturdatei die passende Daten-Datei `*_daten_*.sql`
 - Rendert daraus Tabellenkarten und FK-Beziehungen als PNG
+- Standard-Workflow erzeugt A4-portrait-freundliche Diagramme (Entitaetstypen staerker untereinander)
 - Routed FK-Linien orthogonal um unbeteiligte Tabellen herum, statt Karten zu kreuzen
 - Ueberschreibt bestehende PNGs nur mit `--force`
 - Betroffene Markdown-Dateien erhalten (falls fehlend) einen Abschnitt "Modellgrafik Teil C" mit PNG-Einbettung

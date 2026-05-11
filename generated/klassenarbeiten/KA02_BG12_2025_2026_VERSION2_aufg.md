@@ -31,7 +31,7 @@ fassung: aufgaben
 |---|---|---:|---:|
 | A | Theorie (MC) | 3 | 5 Min |
 | B | EERM, Normalisierung, Anomalien | 14 | 25 Min |
-| C | SQL-Abfragen über viele Tabellen | 14 | 25 Min |
+| C | SQL-Abfragen ueber mehrere Tabellen | 14 | 25 Min |
 | D | Grundlagen Programmierung (Struktogramm) | 3 | 5 Min |
 | **Gesamt** |  | **34** | **60 Min** |
 
@@ -77,13 +77,13 @@ Nennen Sie je ein Beispiel:
 
 ---
 
-## Teil C (14 Punkte): SQL-Abfragen über viele Tabellen
+## Teil C (14 Punkte): SQL-Abfragen ueber mehrere Tabellen
 
 **Separater SQL-Kontext (3NF, Kontext 2) – anderen Kontext als Modellierung:**
 Für Teil C wird absichtlich ein anderen Kontext verwendet als in Teil B (Kontext 1), damit die Modellierungslösung aus Teil B nicht indirekt vorgegeben wird.
 
 **Konkreter Sachverhalt:**
-Ein Campus-Coworking-System verwaltet Kundinnen und Kunden, Standorte, Tarife, Arbeitsplätze, Buchungen, Zahlungen und Supporttickets.
+Ein Campus-Coworking-System verwaltet Kundinnen und Kunden, Standorte, Arbeitsplaetze, Buchungen, Zahlungen und Supporttickets (6 Entitaetstypen).
 
 **Arbeitsgrundlage:**
 - SQL-Struktur: `coworkingcampus_struktur_2025.sql`
@@ -103,7 +103,7 @@ Ermitteln Sie je Kundin/Kunde die Anzahl abgeschlossener Buchungen. Zeigen Sie n
 Geben Sie pro Standort den letzten Buchungsstart und die Anzahl unterschiedlicher Kundinnen/Kunden aus, die dort gebucht haben.
 
 ### Aufgabe 4.4 (3 Punkte)
-Finden Sie Betreuende ohne zugewiesenes Supportticket (LEFT JOIN).
+Finden Sie Kundinnen/Kunden ohne Supportticket (LEFT JOIN).
 
 ---
 

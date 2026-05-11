@@ -43,7 +43,9 @@ bash ../../scripts/generate-ka-varianten.sh KA02_BG12_2025_2026
 
 - **stadtfahrradverleih_2025.mwb**
    - EERM-Modellspezifikation fuer die SQL-Datenbank in Teil C
-   - Als Modellcontainer abgelegt; fuer native Designerbearbeitung in Workbench aus SQL-Struktur und SQL-Daten ableiten oder aktualisieren
+   - Muss als natives Workbench-Modell vorliegen (keine Platzhalterdatei)
+   - Fuer echte Workbench-Dateien zuerst SQL in Schemas laden und dann reverse engineeren:
+     `bash scripts/prepare-workbench-mwb.sh`
 
 - **KA02_BG12_2025_60min_34P_SQLDB_EERM.png** (optional)
    - SQL-basiert gerenderte Referenzgrafik (oder exportierte Workbench-Grafik) fuer Unterrichtsmaterial
@@ -177,6 +179,10 @@ Alle Dateien in diesem Verzeichnis folgen einer strikten Benennungskonvention:
 ### Modell-Container (.mwb)
 - Format: `{Systemname}_{Jahr}.mwb`
 - Beispiel: `kursplattform_2025.mwb`, `stadtfahrradverleih_2025.mwb`
+- Hinweis: Ein echter Workbench-Container enthaelt intern `document.mwb.xml`.
+- Platzhalterdateien sind nicht zulaessig.
+- Pruefung: `bash scripts/validate-mwb-native.sh`
+- Falls nur Spezifikation vorliegt: `bash scripts/prepare-workbench-mwb.sh` ausfuehren und Anleitung in `WORKBENCH-MWB-WORKFLOW.md` verwenden.
 
 ### SQL-Struktur-Dumps (.sql)
 - Format: `{Systemname}_struktur_{Jahr}.sql`

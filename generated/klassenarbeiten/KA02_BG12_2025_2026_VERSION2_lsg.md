@@ -33,7 +33,7 @@ fassung: loesung
 |---|---|---:|---:|
 | A | Theorie (MC) | 3 | 5 Min |
 | B | EERM, Normalisierung, Anomalien | 14 | 25 Min |
-| C | SQL-Abfragen über viele Tabellen | 14 | 25 Min |
+| C | SQL-Abfragen ueber mehrere Tabellen | 14 | 25 Min |
 | D | Grundlagen Programmierung (Struktogramm) | 3 | 5 Min |
 | **Gesamt** |  | **34** | **60 Min** |
 
@@ -73,7 +73,7 @@ fassung: loesung
 
 ---
 
-## Teil C (14 Punkte): SQL-Abfragen über viele Tabellen
+## Teil C (14 Punkte): SQL-Abfragen ueber mehrere Tabellen
 
 **Separater SQL-Kontext (3NF, Kontext 2) – anderen Kontext als Modellierung:**
 Für Teil C wird absichtlich ein anderen Kontext verwendet als in Teil B (Kontext 1), damit die Modellierungslösung aus Teil B nicht indirekt vorgegeben wird.
@@ -92,13 +92,12 @@ SELECT
   k.vorname,
   a.platzcode,
   s.bezeichnung AS standort,
-  t.tarifname,
+  a.tarifname,
   z.betrag
 FROM buchungen b
 JOIN kunden k ON b.kunde_id = k.kunde_id
 JOIN arbeitsplaetze a ON b.platz_id = a.platz_id
 JOIN standorte s ON a.standort_id = s.standort_id
-JOIN tarifmodelle t ON a.tarif_id = t.tarif_id
 JOIN zahlungen z ON b.buchung_id = z.buchung_id
 WHERE b.status = 'abgeschlossen'
 ORDER BY k.nachname, b.startzeit;
@@ -132,9 +131,9 @@ GROUP BY s.standort_id, s.bezeichnung;
 
 ### Aufgabe 4.4 (3 Punkte) – Musterlösung
 ```sql
-SELECT bt.betreuer_id, bt.vorname, bt.nachname, bt.rolle
-FROM betreuende bt
-LEFT JOIN supporttickets st ON bt.betreuer_id = st.betreuer_id
+SELECT k.kunde_id, k.vorname, k.nachname
+FROM kunden k
+LEFT JOIN supporttickets st ON k.kunde_id = st.kunde_id
 WHERE st.ticket_id IS NULL;
 ```
 **Bewertung:** LEFT JOIN 1,5 Pkt | IS NULL 1,5 Pkt
