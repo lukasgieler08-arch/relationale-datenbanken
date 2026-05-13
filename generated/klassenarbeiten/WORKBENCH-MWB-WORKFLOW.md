@@ -4,6 +4,8 @@ Diese Datei wurde automatisch erzeugt mit:
 
 `bash scripts/prepare-workbench-mwb.sh`
 
+FK-/Index-Muster-Normalisierung: aktiv
+
 ## 1) Vorbereitete Datenbankschemata
 
 | System | Jahr | Schema fuer Reverse Engineering | Charset | Collation | Tabellen | Struktur-SQL | Daten-SQL | Ziel-.mwb |
@@ -11,6 +13,7 @@ Diese Datei wurde automatisch erzeugt mit:
 | coworkingcampus | 2025 | wb_coworkingcampus_2025 | utf8 | utf8_general_ci | 6 | generated/klassenarbeiten/coworkingcampus_struktur_2025.sql | generated/klassenarbeiten/coworkingcampus_daten_2025.sql | generated/klassenarbeiten/coworkingcampus_2025.mwb |
 | foodtrucknetz | 2025 | wb_foodtrucknetz_2025 | utf8 | utf8_general_ci | 6 | generated/klassenarbeiten/foodtrucknetz_struktur_2025.sql | generated/klassenarbeiten/foodtrucknetz_daten_2025.sql | generated/klassenarbeiten/foodtrucknetz_2025.mwb |
 | stadtfahrradverleih | 2025 | wb_stadtfahrradverleih_2025 | utf8 | utf8_general_ci | 6 | generated/klassenarbeiten/stadtfahrradverleih_struktur_2025.sql | generated/klassenarbeiten/stadtfahrradverleih_daten_2025.sql | generated/klassenarbeiten/stadtfahrradverleih_2025.mwb |
+
 
 ## 2) Schritte in MySQL Workbench (pro System)
 
