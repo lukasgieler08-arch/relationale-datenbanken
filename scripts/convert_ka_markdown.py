@@ -169,8 +169,11 @@ def markdown_to_html(md_file, html_file):
         body {{
             font-family: 'Calibri', 'Arial', sans-serif;
             line-height: 1.45;
-            margin: 0 auto;
-            max-width: 186mm;
+            margin: 0;
+            width: 100%;
+            max-width: none;
+            box-sizing: border-box;
+            padding: 0 12mm;
             color: #222;
             font-size: 11pt;
         }}
@@ -207,6 +210,7 @@ def markdown_to_html(md_file, html_file):
             padding: 0.4em 0.45em;
             text-align: left;
             vertical-align: top;
+            font-family: 'Calibri', 'Arial', sans-serif;
             font-size: 10.5pt;
             overflow-wrap: anywhere;
             word-break: break-word;
