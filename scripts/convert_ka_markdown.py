@@ -11,6 +11,25 @@ import markdown
 from pathlib import Path
 
 
+SHARP_S_REPLACEMENTS: dict[str, str] = {
+    # Nur explizite Woerter, um Fehlkorrekturen in Fachbegriffen/Identifiern zu vermeiden.
+    "ausschliesslich": "ausschließlich",
+    "ausser": "außer",
+    "ausserdem": "außerdem",
+    "groesse": "größe",
+    "grosser": "größer",
+    "grossen": "größen",
+    "groesste": "größte",
+    "groessten": "größten",
+    "groesstes": "größtes",
+    "groesster": "größter",
+    "heisst": "heißt",
+    "strasse": "straße",
+    "strassen": "straßen",
+    "weiss": "weiß",
+}
+
+
 def _extract_alt_text(img_attrs: str) -> str:
     alt_match = re.search(r'alt\s*=\s*"([^"]*)"', img_attrs, re.IGNORECASE)
     if alt_match:
@@ -60,6 +79,79 @@ def _render_svg_from_xml(xml_path: Path) -> str | None:
 
 def _to_rel_posix(base_dir: Path, target: Path) -> str:
     return Path(os.path.relpath(target, base_dir)).as_posix()
+
+
+def _protect_content_blocks(content: str, patterns: list[str], placeholder_prefix: str) -> tuple[str, dict[str, str]]:
+    protected: dict[str, str] = {}
+    updated = content
+    index = 0
+
+    for pattern in patterns:
+        regex = re.compile(pattern, re.DOTALL)
+        while True:
+            match = regex.search(updated)
+            if not match:
+                break
+            placeholder = f"__{placeholder_prefix}_{index}__"
+            protected[placeholder] = match.group(0)
+            updated = updated[: match.start()] + placeholder + updated[match.end() :]
+            index += 1
+
+    return updated, protected
+
+
+def _restore_content_blocks(content: str, protected: dict[str, str]) -> str:
+    restored = content
+    for placeholder, original in protected.items():
+        restored = restored.replace(placeholder, original)
+    return restored
+
+
+def _replace_word_preserve_case(word: str, replacement: str) -> str:
+    if word.isupper():
+        return replacement.upper()
+    if word[0].isupper():
+        return replacement[0].upper() + replacement[1:]
+    return replacement
+
+
+def _normalize_sharp_s_in_text(content: str) -> str:
+    normalized = content
+    for source, target in SHARP_S_REPLACEMENTS.items():
+        pattern = re.compile(rf"\b{re.escape(source)}\b", re.IGNORECASE)
+        normalized = pattern.sub(lambda m: _replace_word_preserve_case(m.group(0), target), normalized)
+    return normalized
+
+
+def _normalize_sharp_s_for_markdown(md_content: str) -> str:
+    # Frontmatter und Code-Bloecke ausnehmen, damit keine technischen Identifier veraendert werden.
+    frontmatter_pattern = re.compile(r"\A---\n.*?\n---\n", re.DOTALL)
+    frontmatter_match = frontmatter_pattern.match(md_content)
+
+    frontmatter = ""
+    body = md_content
+    if frontmatter_match:
+        frontmatter = frontmatter_match.group(0)
+        body = md_content[frontmatter_match.end() :]
+
+    body, fenced_code = _protect_content_blocks(body, [r"```[\s\S]*?```"], "FENCE")
+    body, inline_code = _protect_content_blocks(body, [r"`[^`\n]+`"], "INLINE")
+
+    body = _normalize_sharp_s_in_text(body)
+
+    body = _restore_content_blocks(body, inline_code)
+    body = _restore_content_blocks(body, fenced_code)
+    return frontmatter + body
+
+
+def _apply_sharp_s_normalization_to_file(md_file: Path) -> bool:
+    original = md_file.read_text(encoding="utf-8")
+    normalized = _normalize_sharp_s_for_markdown(original)
+    if normalized == original:
+        return False
+    md_file.write_text(normalized, encoding="utf-8")
+    print(f"✍️  ß-Normalisierung angewendet: {md_file}")
+    return True
 
 
 def _normalize_table_style(existing_style: str) -> str:
@@ -409,6 +501,8 @@ def main():
     for md_file in md_files:
         html_file = md_file.with_suffix(".html")
         print(f"\n🔄 Verarbeite: {md_file}")
+
+        _apply_sharp_s_normalization_to_file(md_file)
 
         # Validierung
         validate_markdown(str(md_file))

@@ -119,7 +119,7 @@ Erstellen Sie ein **Struktogramm** (gemäß Operatorenliste für Struktogramme) 
 - **Verarbeitung:** Berechnung der Gesamtkosten
 - **Ausgabe:** Gesamtkosten in Euro
 
-**Hinweis:** Verwenden Sie ausschliesslich Sequenz-Blöcke (EVA-Prinzip).
+**Hinweis:** Verwenden Sie ausschließlich Sequenz-Blöcke (EVA-Prinzip).
 Kontrollstrukturen (Schleifen, Verzweigungen) werden **nicht** bewertet und sind nicht erforderlich.
 
 | Bewertungskriterium | Punkte |
