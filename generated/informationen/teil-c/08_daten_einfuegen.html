@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil C - Daten einfügen</title>
+  <style>
+    :root { --bg:#f3fff9; --card:#fff; --text:#163326; --accent:#127a4d; --tip:#e5fff1; }
+    body { margin:0; font-family:"Segoe UI","Calibri",sans-serif; background:linear-gradient(120deg,#f3fff9,#f3f8ff); color:var(--text); }
+    .wrap { max-width:960px; margin:24px auto; padding:0 16px; } .card { background:#fff; border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent);} pre { background:#10251b; color:#e6fff3; padding:12px; border-radius:8px; }
+    .tip { background:var(--tip); border-left:5px solid #127a4d; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body><div class="wrap"><div class="card">
+  <h1>Teil C: Daten einfügen</h1>
+  <pre><code>INSERT INTO FOODTRUCK (TruckID, Name, Kategorie, Rating)
+VALUES (101, 'Green Wheels', 'Vegan', 4.7);</code></pre>
+  <pre><code>INSERT INTO STANDORT (StandortID, Stadt)
+VALUES (1, 'Kiel'), (2, 'Luebeck');</code></pre>
+  <div class="tip"><strong>Merksatz:</strong> Spaltenliste immer explizit angeben.</div>
+</div></div></body>
+</html>

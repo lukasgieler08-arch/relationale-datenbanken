@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil C - Redundanzen in Abfrageergebnissen</title>
+  <style>
+    :root { --bg:#f4f7ff; --card:#fff; --text:#1c2340; --accent:#2f4bb2; --tip:#e9efff; --warn:#fff3e8; }
+    body { margin:0; font-family:"Segoe UI","Tahoma",sans-serif; background:linear-gradient(120deg,#f4f7ff,#f7fff8); color:var(--text); }
+    .wrap { max-width:960px; margin:24px auto; padding:0 16px; } .card { background:#fff; border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent);} pre { background:#111827; color:#e5e7eb; padding:12px; border-radius:8px; }
+    .tip { background:var(--tip); border-left:5px solid #2f4bb2; padding:10px; border-radius:8px; }
+    .warn { background:var(--warn); border-left:5px solid #d9822b; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body><div class="wrap"><div class="card">
+  <h1>Teil C: Redundanzen in Abfrageergebnissen</h1>
+  <pre><code>SELECT f.Name
+FROM FOODTRUCK f
+JOIN EINSATZ e ON e.TruckID = f.TruckID;</code></pre>
+  <p>Ein Truck mit mehreren Einsätzen erscheint mehrfach.</p>
+  <pre><code>SELECT DISTINCT f.Name
+FROM FOODTRUCK f
+JOIN EINSATZ e ON e.TruckID = f.TruckID;</code></pre>
+  <div class="tip"><strong>Merksatz:</strong> Erst Ursache klären, dann DISTINCT nutzen.</div>
+  <div class="warn"><strong>Hinweis:</strong> Doppelte Zeilen sind bei m:n oft fachlich korrekt.</div>
+</div></div></body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil B - Kardinalitäten</title>
+  <style>
+    :root { --bg:#f8fbf2; --card:#fff; --text:#1d2c1f; --accent:#2f7d32; --note:#e9f8ea; --warn:#fff3e9; }
+    body { margin:0; font-family:"Segoe UI","Verdana",sans-serif; background:linear-gradient(120deg,#f8fbf2,#eef8ff); color:var(--text); }
+    .wrap { max-width:980px; margin:24px auto; padding:0 16px; }
+    .card { background:var(--card); border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent); }
+    h2 { border-bottom:2px solid #d9f0dc; padding-bottom:6px; }
+    .note { background:var(--note); border-left:5px solid #2f7d32; padding:12px; border-radius:8px; }
+    .warn { background:var(--warn); border-left:5px solid #d9822b; padding:12px; border-radius:8px; }
+    ul,ol { line-height:1.55; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Teil B: Kardinalitäten</h1>
+      <p><strong>Fokus:</strong> Eine-Sätze und mengenmäßiger Zusammenhang</p>
+
+      <h2>Lernziele</h2>
+      <ul>
+        <li>Kardinalitäten aus Texten korrekt ableiten.</li>
+        <li>Pro Beziehung zwei eindeutige Eine-Sätze formulieren.</li>
+        <li>Minimum und Maximum fachlich begründen.</li>
+      </ul>
+
+      <h2>Eine-Satz-Methode</h2>
+      <p>Formuliere immer je Richtung einen Satz:</p>
+      <ul>
+        <li>Von Entität A nach B</li>
+        <li>Von Entität B nach A</li>
+      </ul>
+
+      <h2>Beispiel Lernlabor</h2>
+      <p>LEHRKRAFT und WORKSHOP</p>
+      <ul>
+        <li>Eine Lehrkraft betreut mehrere Workshops.</li>
+        <li>Ein Workshop wird von genau einer Lehrkraft betreut.</li>
+      </ul>
+      <p>Ergebnis: <strong>1:n</strong></p>
+
+      <h2>Mengenmäßiger Zusammenhang</h2>
+      <ul>
+        <li>Minimum: 0 oder 1?</li>
+        <li>Maximum: 1 oder n?</li>
+      </ul>
+
+      <div class="note"><strong>Merksatz:</strong> Erst Sprache, dann Diagramm.</div>
+      <div class="warn"><strong>Typischer Fehler:</strong> Nur eine Richtung begründen.</div>
+    </div>
+  </div>
+</body>
+</html>

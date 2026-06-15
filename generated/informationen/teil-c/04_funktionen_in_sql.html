@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil C - Funktionen in SQL</title>
+  <style>
+    :root { --bg:#f4fcff; --card:#fff; --text:#153041; --accent:#0077a6; --tip:#e6f7ff; }
+    body { margin:0; font-family:"Segoe UI","Calibri",sans-serif; background:linear-gradient(120deg,#f4fcff,#f6fff5); color:var(--text); }
+    .wrap { max-width:960px; margin:24px auto; padding:0 16px; } .card { background:#fff; border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent);} pre { background:#0b1220; color:#dbeafe; padding:12px; border-radius:8px; }
+    .tip { background:var(--tip); border-left:5px solid #0077a6; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body><div class="wrap"><div class="card">
+  <h1>Teil C: Funktionen in SQL</h1>
+  <h2>Zeilenfunktionen</h2>
+  <pre><code>SELECT UPPER(Name) AS NameGross, ROUND(Rating, 1) AS Bewertet
+FROM FOODTRUCK;</code></pre>
+  <h2>Aggregatfunktionen</h2>
+  <pre><code>SELECT COUNT(*) AS Anzahl, AVG(Rating) AS Durchschnitt
+FROM FOODTRUCK;</code></pre>
+  <div class="tip"><strong>Merksatz:</strong> Aggregatfunktionen verdichten mehrere Zeilen zu Kennzahlen.</div>
+</div></div></body>
+</html>

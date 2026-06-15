@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil B - Grundlagen Modellierung (EERM)</title>
+  <style>
+    :root { --bg:#f4f8ff; --card:#ffffff; --text:#172033; --accent:#005f99; --accent-2:#00a3a3; --note:#e8fff8; --warn:#fff4e5; }
+    body { margin:0; font-family: "Segoe UI", "Trebuchet MS", sans-serif; background: linear-gradient(135deg,#f4f8ff,#eefaf8); color:var(--text); }
+    .wrap { max-width: 980px; margin: 24px auto; padding: 0 16px; }
+    .card { background:var(--card); border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1 { margin-top:0; color:var(--accent); }
+    h2 { color:var(--accent); border-bottom:2px solid #d8ecff; padding-bottom:6px; }
+    .badge { display:inline-block; background:var(--accent-2); color:#fff; border-radius:999px; padding:4px 12px; font-size:.9rem; }
+    .note { background:var(--note); border-left:5px solid #1ca37d; padding:12px; border-radius:8px; }
+    .warn { background:var(--warn); border-left:5px solid #d9822b; padding:12px; border-radius:8px; }
+    ul, ol { line-height:1.55; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <span class="badge">Sek II Abschlussjahr</span>
+      <h1>Teil B: Grundlagen Modellierung (EERM)</h1>
+      <p><strong>Kontext:</strong> Schulisches Lernlabor (Teil-B-Kontext)</p>
+
+      <h2>Lernziele</h2>
+      <ul>
+        <li>Zweck eines EERM sicher erklären.</li>
+        <li>Entitätstyp, Attribut und Beziehungstyp unterscheiden.</li>
+        <li>Einen Sachverhalt in MySQL Workbench als EERM modellieren.</li>
+      </ul>
+
+      <h2>Zentrale Begriffe</h2>
+      <ul>
+        <li><strong>Entitätstyp:</strong> Objektbereich, über den Daten gespeichert werden.</li>
+        <li><strong>Attribut:</strong> Eigenschaft eines Entitätstyps.</li>
+        <li><strong>Primärschlüssel:</strong> eindeutige Identifikation einer Entität.</li>
+        <li><strong>Beziehungstyp:</strong> fachliche Verknüpfung zwischen Entitätstypen.</li>
+      </ul>
+
+      <h2>Praktisches Beispiel</h2>
+      <p>Im Lernlabor wählen Schülerinnen und Schüler Workshops:</p>
+      <ul>
+        <li>SCHUELER(SchuelerID, Vorname, Nachname, Jahrgang)</li>
+        <li>WORKSHOP(WorkshopID, Titel, Raum)</li>
+        <li>NIMMT_TEIL(SchuelerID, WorkshopID)</li>
+      </ul>
+      <p>Ein Schüler kann mehrere Workshops wählen, ein Workshop hat mehrere Schüler: fachlich <strong>m:n</strong>.</p>
+
+      <h2>Vorgehen in Teil B</h2>
+      <ol>
+        <li>Nomen markieren: mögliche Entitätstypen.</li>
+        <li>Verben markieren: mögliche Beziehungstypen.</li>
+        <li>Attribute und Primärschlüssel festlegen.</li>
+        <li>Kardinalitäten begründen.</li>
+        <li>EERM sauber in Workbench zeichnen.</li>
+      </ol>
+
+      <div class="note"><strong>Merksatz:</strong> Fachlogik zuerst, Technik danach.</div>
+      <div class="warn"><strong>Typischer Fehler:</strong> Beziehung als Attribut modellieren.</div>
+    </div>
+  </div>
+</body>
+</html>

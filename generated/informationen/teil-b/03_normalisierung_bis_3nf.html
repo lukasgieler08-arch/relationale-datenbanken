@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil B - Normalisierung bis 3NF</title>
+  <style>
+    :root { --bg:#fffaf3; --card:#fff; --text:#2d2213; --accent:#a15b00; --note:#fff2df; --ok:#ecfff3; }
+    body { margin:0; font-family:"Segoe UI","Tahoma",sans-serif; background:linear-gradient(130deg,#fffaf3,#f4fff8); color:var(--text); }
+    .wrap { max-width:980px; margin:24px auto; padding:0 16px; }
+    .card { background:var(--card); border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent); }
+    h2 { border-bottom:2px solid #f3ddbf; padding-bottom:6px; }
+    .note { background:var(--note); border-left:5px solid #a15b00; padding:12px; border-radius:8px; }
+    .ok { background:var(--ok); border-left:5px solid #2f9e60; padding:12px; border-radius:8px; }
+    ul,ol { line-height:1.55; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Teil B: Normalisierung bis zur 3. Normalform</h1>
+
+      <h2>1NF</h2>
+      <p>Alle Werte sind atomar, keine Listen in einem Feld.</p>
+
+      <h2>2NF</h2>
+      <p>Jedes Nichtschlüsselattribut hängt vollständig vom gesamten Schlüssel ab.</p>
+
+      <h2>3NF</h2>
+      <p>Keine transitiven Abhängigkeiten zwischen Nichtschlüsselattributen.</p>
+
+      <h2>Beispiel Lernlabor</h2>
+      <ul>
+        <li>Ungünstig: TEILNAHME(SchuelerID, WorkshopID, SchuelerName)</li>
+        <li>Problem: SchuelerName hängt nur von SchuelerID ab</li>
+        <li>Verbesserung: SCHUELER auslagern</li>
+      </ul>
+
+      <div class="note"><strong>Merksätze:</strong> 1NF = keine Listen, 2NF = volle Schlüsselabhängigkeit, 3NF = keine indirekten Abhängigkeiten.</div>
+      <div class="ok"><strong>Klausurtipp:</strong> Immer zuerst Schlüssel und funktionale Abhängigkeiten notieren.</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil C - Projektion in SQL</title>
+  <style>
+    :root { --bg:#fffdf4; --card:#fff; --text:#302913; --accent:#a46b00; --tip:#fff4dc; }
+    body { margin:0; font-family:"Segoe UI","Verdana",sans-serif; background:linear-gradient(120deg,#fffdf4,#f3fbff); color:var(--text); }
+    .wrap { max-width:960px; margin:24px auto; padding:0 16px; } .card { background:#fff; border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent);} pre { background:#1f2937; color:#f9fafb; padding:12px; border-radius:8px; }
+    .tip { background:var(--tip); border-left:5px solid #a46b00; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body><div class="wrap"><div class="card">
+  <h1>Teil C: Projektion in SQL</h1>
+  <h2>Was ist Projektion?</h2>
+  <p>Projektion bestimmt, welche Spalten im Ergebnis sichtbar sind.</p>
+  <pre><code>SELECT Name, Kategorie
+FROM FOODTRUCK;</code></pre>
+  <pre><code>SELECT DISTINCT Stadt
+FROM STANDORT;</code></pre>
+  <div class="tip"><strong>Merksatz:</strong> Projektion steuert Spalten, Selektion steuert Zeilen.</div>
+</div></div></body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "documents": [
+    {
+      "slug": "bg2-ag-eg-sg-wg-informatik-18-3992k-neu-abitur2021",
+      "source_pdf": "uploads/lehrplaene/BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf",
+      "document_json": "generated/lehrplaene/bg2-ag-eg-sg-wg-informatik-18-3992k-neu-abitur2021.json",
+      "page_count": 16,
+      "chunk_count": 39,
+      "tag_summary": {
+        "eerm": 6,
+        "begruendung": 4,
+        "relationale-datenbanken": 3,
+        "pruefung": 2,
+        "sql-select": 2,
+        "datenintegritaet": 1,
+        "normalisierung": 1,
+        "sql-dml": 1,
+        "sql-group-by": 1,
+        "sql-join": 1
+      }
+    }
+  ]
+}

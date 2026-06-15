@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil C - Daten löschen</title>
+  <style>
+    :root { --bg:#fff4f4; --card:#fff; --text:#3c1d1d; --accent:#b73232; --tip:#ffe7e7; --warn:#ffd8d8; }
+    body { margin:0; font-family:"Segoe UI","Verdana",sans-serif; background:linear-gradient(120deg,#fff4f4,#f4f9ff); color:var(--text); }
+    .wrap { max-width:960px; margin:24px auto; padding:0 16px; } .card { background:#fff; border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent);} pre { background:#351515; color:#ffe9e9; padding:12px; border-radius:8px; }
+    .tip { background:var(--tip); border-left:5px solid #b73232; padding:10px; border-radius:8px; }
+    .warn { background:var(--warn); border-left:5px solid #8f1f1f; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body><div class="wrap"><div class="card">
+  <h1>Teil C: Daten löschen</h1>
+  <pre><code>DELETE FROM EINSATZ
+WHERE EinsatzID = 5001;</code></pre>
+  <p>Sicherheitsroutine: SELECT prüfen, FK-Beziehungen prüfen, dann DELETE.</p>
+  <div class="tip"><strong>Merksatz:</strong> Integrität geht vor Geschwindigkeit.</div>
+  <div class="warn"><strong>Achtung:</strong> DELETE ohne WHERE löscht alle Zeilen.</div>
+</div></div></body>
+</html>

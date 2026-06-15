@@ -1,0 +1,330 @@
+{
+  "source_pdf": "uploads/lehrplaene/BG2-AG-EG-SG-WG_Informatik_18_3992k_NEU_Abitur2021.pdf",
+  "slug": "bg2-ag-eg-sg-wg-informatik-18-3992k-neu-abitur2021",
+  "page_count": 16,
+  "chunk_count": 39,
+  "tag_summary": {
+    "eerm": 6,
+    "begruendung": 4,
+    "relationale-datenbanken": 3,
+    "pruefung": 2,
+    "sql-select": 2,
+    "datenintegritaet": 1,
+    "normalisierung": 1,
+    "sql-dml": 1,
+    "sql-group-by": 1,
+    "sql-join": 1
+  },
+  "chunks": [
+    {
+      "chunk_id": "chunk-001",
+      "page_start": 1,
+      "page_end": 2,
+      "text": "– Agrarwissenschaftliche Richtung (AG) – Ernährungswis senschaftliche Richtung (EG) – Sozial - und Gesundheits - wissenschaftliche Richtung (SGG) : alle Profile – Wirtschaftswissenschaftliche Richtung (WG) : alle Profile\n\nDer Bildungsplan tritt für die Ei ngangsklasse am 1. August 201 9, für die Jahrgangsstufe 1 am 1. August 2019 und für die Jahrgangsstufe 2 am 1. August 2020 in Kraft.\n\nBerufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Vorbemerkungen",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-002",
+      "page_start": 2,
+      "page_end": 2,
+      "text": "Die Entwicklung der Informationstechnolog ien durchdringt mit zunehmender Geschwindigkeit alle Bereiche der Lebenswelt in der Gesellschaft. Sie verändert individuelle Lebensgewohnheiten, Kommunikationswege und Interaktionsmöglichkeiten, die Schul -, Ausbildungs - und Berufswelten sowie zahlreiche gesellschaftlich e Prozesse auf unterschiedliche Weise. Viele Entwicklungen, die zukünftig bedeutsam sein werden, sind noch nicht bekannt. Die Schülerinnen und Schüler stehen vor der Herausforderung, sich in einer ständig wandelnden Welt zurechtzufinden, die von Inform ationssystemen geprägt ist. Sie sollen die darin enthaltenen Chancen erkennen, einen geeigneten Umgang mit möglichen Risiken finden und die Gesellschaft und ihre Werte in dieser Dynamik konstruktiv begleiten und weiterentwickeln.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-003",
+      "page_start": 2,
+      "page_end": 2,
+      "text": "Im Fach Informatik ist ein offener, reflektierter, aber auch kritischer Umgang mit Informationstechnologien und ihren Auswirkungen notwendig. Voraussetzung dafür ist ein Verständnis für die grundlegenden Funktionsweisen und wesentlichen Merkmale der zentralen Felder der Info rmatik. Deshalb ist es wichtig, Interesse für diese Technologien und ihre Funktionsweisen zu wecken. Eine wichtige Zielsetzung des Bildungsplans ist es daher, anschauliche und lebensweltbezogene Zugänge zu eröffnen.\n\nUnabdingbar ist ein sicherer und kons truktiver Umgang mit geeigneten Werkzeugen der Informationstechnologie, da nur so eine produktive Nutzung der sich eröffnenden Möglichkeiten erreicht werden kann.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-004",
+      "page_start": 2,
+      "page_end": 2,
+      "text": "Die Schülerinnen und Schüler erwerben im Fach Informatik Kompetenzen, die sie befähigen, ein Problem mit den dazu zur Verfügung stehenden Daten zu analysieren, im Sinne eines prozessorientierten Vorgehens zu lösen und mit fachspezifischen Werkzeugen und Methoden hinreichend zu dokumentieren. Die im Fach Informatik erworbenen Kompetenzen beziehen sich sowohl auf die Inhalte des Faches Informatik, als auch auf zentrale Prozesse und Arbeitsweisen der Informatik als angewandte Wissenschaft. Die in den vorgelagerten Schularten erwo rbenen informatorischen prozessbezogenen Kompetenzen werden hier nun vereinheitlicht und vertieft. Darüber hinaus werden weitere prozessbezogenen Kompetenzen erworben.\n\n– Strukturieren und Vernetzen – Modellieren und Implementieren – Kommunizieren und Kooperieren – Analysieren und Bewerten",
+      "tags": [
+        "begruendung"
+      ]
+    },
+    {
+      "chunk_id": "chunk-005",
+      "page_start": 3,
+      "page_end": 3,
+      "text": "Berufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Strukturieren und Vernetzen Die Informatik als Strukturwissenschaft beschäftigt sich mit der Strukturierung von Daten und Prozessen in unterschiedlichen Problemdomänen. Dabei werde n von den Schülerinnen und Schülern Strukturen innerhalb von Daten und Algorithmen erkannt und in Teilaspekte zerlegt, um diese zu lösen und im Gesamtprozess zu einer Gesamtlösung zusammenzuführen. Auch die aktuell unter dem Begriff Big Data subsumierten i nformatorischen Zusammenhänge lassen sich nur dann zielgerichtet verarbeiten, wenn die Schülerinnen und Schüler die zugrundeliegenden Daten zu einer geeigneten Struktur aufbereiten, auf deren Basis dann die gewünschten Auswertungen durchgeführt werden könn en.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-006",
+      "page_start": 3,
+      "page_end": 3,
+      "text": "Modellieren und Implementieren Um real existierende fachliche Probleme zu lösen, werden unter Erhöhung der Abstraktion Modelle entwickelt, die eine Analyse des Problemgehalts ermöglichen. Hierbei erkennen die Schülerinnen und Schüler Regelmäßigkeiten, Wiederholungen und gegebenenfalls Gesetzmäßigkeiten und transferieren diese auf ein vom tatsächlichen Problem losgelöstes höheres Abstraktionsniveau. Die Schülerinnen und Schüler implementieren Algorithmen, testen ihre Lösungen auf Unzulänglichkeiten und überprüfen die Ergebnisse auf ihre Relevanz für das Ausgangsproblem.",
+      "tags": [
+        "eerm"
+      ]
+    },
+    {
+      "chunk_id": "chunk-007",
+      "page_start": 3,
+      "page_end": 3,
+      "text": "Kommunizieren und Kooperieren Unter Zuhilfenahme praxisrelevanter Dokumentations - und Visualisierungsverfahren und entsprechender Fachterminologie dokumentieren die Schülerinnen und Schü ler die Ergebnisse der bearbeiteten Teilprozesse und schaffen damit die Basis für eine kooperative Lösung des Gesamtproblems. Der Beschreibung von Prozessen kommt eine hohe praktische Bedeutung zu und sie ist die Grundlage für die Abstimmung in arbeitsteil ig organisierten Teams.",
+      "tags": [
+        "eerm"
+      ]
+    },
+    {
+      "chunk_id": "chunk-008",
+      "page_start": 3,
+      "page_end": 3,
+      "text": "Analysieren und Bewerten Die Schülerinnen und Schüler analysieren im Informatikunterricht Problemstellungen, Modelle, vorgegebene Programmcodes, das Verhalten informatorischer Systeme sowie deren Auswirkungen auf das gesellschaftli che Zusammenleben. Darüber hinaus bewerten sie die Relevanz der gefundenen Lösungen sowohl im Hinblick auf das Ausgangsproblem als auch im Hinblick auf gesellschaftliche Zusammenhänge und Normen. In der Eingangsklasse setzen die Schülerinnen und Schüler d ie Tabellenkalkulation zielgerichtet ein, um Daten zu strukturieren, auf vielfältige Weise auszuwerten und zu visualisieren. Die Schülerinnen und Schüler sammeln ihre Erfahrungen mit Informationstechnologien hauptsächlich durch das Internet. Infolge dessen erstellen die Schülerinnen und Schüler in der Eingangsklasse Internetseiten, was zugleich einen exemplarischen Zugang zu einem wichtigen Baustein der Softwareentwicklung, den Auszeichnungssprachen, ermöglicht. Die Vernetzung von Geräten und Gegenständen d er Alltags - und Berufswelt begründet, dass sich die Schülerinnen und Schüler mit wichtigen Elementen der zugrundeliegenden Netzwerktechnologien vertraut machen. Zudem erarbeiten Sie die Sicherheitsaspekte und untersuchen die Chancen und Risiken einer verne tzten Gesellschaft. Außerdem werden in der Eingangsklasse die elementaren Konzepte der Darstellung von Informationen in Rechnern thematisiert, wobei wichtige Aspekte im Umgang mit Daten im Kontext der Informatik vermittelt werden.",
+      "tags": [
+        "begruendung",
+        "eerm"
+      ]
+    },
+    {
+      "chunk_id": "chunk-009",
+      "page_start": 4,
+      "page_end": 4,
+      "text": "Berufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc In der Jahrgangsstufe 1 lernen die Schülerinnen und Schüler die Grundlagen der strukturierten Programmierung kennen, wobei ein anschaulicher und motivierender Zugang von hoher Bedeutung ist. Ausgehend von lebensweltbezogenen Problemstellungen entwerfen und implementieren die Schü lerinnen und Schüler Programme zu deren fachlicher Lösung. Die Implementierung dieser Programme erfolgt unter Einsatz einer Entwicklungsumgebung am Computer. Ein zentraler Nutzen informatorischer Technologien liegt in der gezielten Auswertung und Verarbeit ung von Daten. Die Schülerinnen und Schüler analysieren und bewerten fach - und lebensweltbezogene Sachverhalte und entwickeln geeignete relationale Datenmodelle. Ausgehend von diesen Modellen entwickeln sie Datenbankstrukturen, realisieren sie in einer relationalen Datenbank und werten Datenbestände gezielt aus. Die Leistungsfähigkeit moderner Informationstechnologien beruht unter anderem auf den zu Grunde liegenden Algorithmen. In der Jahrgangsstufe 2 beschreiben die Schülerinnen und Schüler ausgewählte Da tenstrukturen und Algorithmen hinsichtlich ihres Aufbaus sowie ihrer Funktionsweise und implementieren diese exemplarisch. Die Schülerinnen und Schüler beschreiben die gesellschaftliche Relevanz von Algorithmen und beurteilen die damit verbundenen Chancen und Risiken.",
+      "tags": [
+        "begruendung",
+        "relationale-datenbanken",
+        "sql-join"
+      ]
+    },
+    {
+      "chunk_id": "chunk-010",
+      "page_start": 4,
+      "page_end": 4,
+      "text": "Die folgenden Inhalte sind im Unterricht mittels einer geeigneten Programmiersprache und Entwicklungsumgebung am Computer zu vermitteln:\n\n Grundlagen der Programmierung (BPE 5),  Arrays, Such - und Sortieralgorithm en (BPE 7).\n\nDie im Unterricht eingesetzte Programmiersprache sowie die verwendete Entwicklungsumgebung sind von der Lehrkraft wählbar. Die Bildungsplaneinheit 6 ist mittels eines geeigneten Datenbankmanagementsystems zu vermitteln.",
+      "tags": [
+        "eerm"
+      ]
+    },
+    {
+      "chunk_id": "chunk-011",
+      "page_start": 4,
+      "page_end": 4,
+      "text": "Der Bildungsplan zeichnet sich durch eine Inhalts - und eine Kompetenzorientierung aus. In jeder Bildungsplaneinheit (BPE) werden in kursiver Schrift die übergeordneten Ziele beschrieben, die durch Zielformulierungen sowie Inhalts - und H inweisspalte konkretisiert werden. In den Zielformulierungen werden die jeweiligen fachspezifischen Operatoren als Verben verwendet. Operatoren sind handlungsinitiierende Verben, die signalisieren, welche Tätigkeiten beim Bearbeiten von Aufgaben erwartet w erden. Die für das jeweilige Fach relevanten Operatoren sowie deren fachspezifische Bedeutung sind jedem Bildungsplan im Anhang beigefügt. Durch die kompetenzorientierte Zielformulierung mittels dieser Operatoren wird das Anforderungsniveau bezüglich der I nhalte und der zu erwerbenden Kompetenzen definiert. Die formulierten Ziele und Inhalte sind verbindlich und damit prüfungsrelevant. Sie stellen die Regelanforderungen im jeweiligen Fach dar. Die Inhalte der Hinweisspalte sind unverbindliche Ergänzungen zu r Inhaltsspalte und umfassen Beispiele, didaktische Hinweise und Querverweise auf andere Fächer bzw. Bildungsplaneinheiten.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-012",
+      "page_start": 5,
+      "page_end": 5,
+      "text": "Berufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Der VIP -Bereich des Bildungsplans umfasst die Vertiefung, individualisiertes Lernen sowie Projektunterricht. Im Rahmen der hier z ur Verfügung stehenden Stunden sollen die Schülerinnen und Schüler bestmöglich unterstützt und bei der Weiterentwicklung ihrer personalen und fachlichen Kompetenzen gefördert werden. Die Fachlehrerinnen und Fachlehrer nutzen diese Unterrichtszeit nach eige nen Schwerpunktsetzungen auf Basis der fächerspezifischen Besonderheiten und nach den Lernvoraussetzungen der einzelnen Schülerinnen und Schüler.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-013",
+      "page_start": 5,
+      "page_end": 6,
+      "text": "Der Teil „Zeit für Leistungsfeststellung“ des Bildungsplans berücksichtigt die Zeit, die zur Vorbereitung, Du rchführung und Nachbereitung von Leistungsfeststellungen zur Verfügung steht. Dies kann auch die notwendige Zeit für die gleichwertige Feststellung von Schülerleistungen (GFS), Nachbesprechung zu Leistungsfeststellungen sowie Feedback -Gespräche umfassen.\n\nBerufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Bildungsplanübersicht\n\nSchuljahr B i l d u n g s p l a n e i n h e i t e n Zeitricht wert Gesamt stunden Seite",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-014",
+      "page_start": 6,
+      "page_end": 7,
+      "text": "Eingangs - klasse Vertiefung – Individualisiertes Lernen – Projektunterricht (VIP) 20 7 1 Tabellenkalkulation 16 7 2 Entwicklung von Internetseiten 14 8 3 Netze und vernetzte Gesellschaft 14 8 4 Darstellung von Informationen 6 70 9 Zeit für die Leistungsfeststellung 10\n\nJahrgangs - stufe 1 Vertiefung – Individualisiertes Lernen – Projektunterricht (VIP) 20 10 5 Grundlag en der Programmierung 20 10 6 Relationale Datenbanken 30 70 11 Zeit für die Leistungsfeststellung 10\n\nJahrgangs - stufe 2 Vertiefung – Individualisiertes Lernen – Projektunterricht (VIP) 16 12 7 Algorithmen und Datenstruktur en 30 12 8 Gesellschaftliche Aspekte 10 56 13 Zeit für die Leistungsfeststellung 8\n\nBerufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Eingangsklasse",
+      "tags": [
+        "relationale-datenbanken"
+      ]
+    },
+    {
+      "chunk_id": "chunk-015",
+      "page_start": 7,
+      "page_end": 7,
+      "text": "Vertiefung – Individualisiertes Lernen – Projektunterricht (VIP) 20 Vertiefung Individualisiertes Lernen Projektunterricht z. B. Übungen Anwendungen Wiederholungen z. B. Selbstorganisiertes Lernen Lernvereinbarungen Binnendifferenzierung z. B. Erstellen einer Umfrage zum Umgang mit Datensicherheit Entwickeln einer Tabelle zu einem vorgegebenen Thema (Berechnung der Endnote im Abitur, Kalorienrechner) Die Themenauswahl des Projektunterrichts hat aus den nachfolgenden Bildungsplaneinheiten unter Beachtung Fächer verbindender Aspekte zu erfolgen.\n\nBPE 1 Tabellenkalkulation 16 Die Schülerinnen und Schüler wenden Funktionen eines Tabellenkalkulationsprogramms zur Datenbeschreibung, Datenaufarbeitung und Datenanalyse an. Sie werten Daten zur Lösung von realen Problemstellungen aus.",
+      "tags": [
+        "pruefung"
+      ]
+    },
+    {
+      "chunk_id": "chunk-016",
+      "page_start": 7,
+      "page_end": 7,
+      "text": "BPE 1.1 Die Schülerinnen und Schüler wenden grundl egende Funktionen eines Tabellenkalkulationsprogramms an und erstellen Tabellen aus vorgegebenen Sachverhalten. Eingabe von Daten und Formeln z. B. Grundrechenarten, Prozentrechnen Datentypen z. B. Text, Zahl, Währung, Datum Kopieren, Ausschneiden und E infügen von Inhalten Formatierung von Inhalten Aufbau, Logik und Design von Tabellen Bedingte Formatierung\n\nBPE 1.2 Die Schülerinnen und Schüler begründen die Notwendigkeit verschiedener Adressierungsarten und wenden diese an. Relative und absolut e Adressierung z. B. Kopierfähigkeit von Formeln\n\nBPE 1.3 Die Schülerinnen und Schüler werten mit Funktionen Daten aus. Summe, Mittelwert, Min, Max Wenn, auch geschachtelt Verweise S-Verweis",
+      "tags": [
+        "sql-group-by"
+      ]
+    },
+    {
+      "chunk_id": "chunk-017",
+      "page_start": 7,
+      "page_end": 8,
+      "text": "BPE 1.4 Die Schülerinnen und Schüler stellen Daten in gee igneten Diagrammen dar. Balken -, Säulen -, Linien -, Kreis - und Punktdiagramm z. B. Regression Punktdiagramm mit Trendlinie Gestaltung von Diagrammen z. B. Titel, Achsenbeschriftung, Skalierung, Legende\n\nBerufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc BPE 2 Entwicklung von Internetseiten 14 Die Schülerinnen und Schüler entwerfen Internetseiten unter Berücksichtigung der vom W3C standardisierten Sprachen und der Trennung von Inhalt und Design.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-018",
+      "page_start": 8,
+      "page_end": 8,
+      "text": "BPE 2.1 Die Schülerinnen und Schüler erstellen mit Hilfe einer Seitenbeschreibungssprache Internetsei ten mit vorgegebenen Inhalten. Aufbau und Struktur einer Internetseite z. B. HTML, Grundgerüst, Tags Pfadangaben: relativ, absolut Schreibweise von Dateinamen z. B. Case -Sensitivität, Umlaute, Sonderzeichen Überschriften\n\nEinfügen von Bildern und an deren Medien z. B. Video - und Sounddateien Listen/Aufzählungen ohne Formatierung Hyperlinks Tabellen ohne Formatierung\n\nBPE 2.2 Die Schülerinnen und Schüler implementieren mit Hilfe einer Formatierungssprache das Design der Internetseiten. Formatieru ngsebenen CSS-Ebenen: Externe Datei, Head, Tag Styledefinitionen – HTML -Tags – ID- und Klassenselektoren – Box-Modell – Farben, Schriftart/ -größe, Ausrichtung",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-019",
+      "page_start": 8,
+      "page_end": 8,
+      "text": "BPE 2.3 Die Schülerinnen und Schüler wenden rechtliche Vorgaben bei der Veröffentlichung von Intern etseiten an. Sie wenden Übertragungstechniken an, um ihre Internetseiten auf eine nicht -öffentliche Plattform zu publizieren. Rechtliche Anforderungen für Webseiten – Impressum/Disclaimer – Urheberrechte Creative Commons -Lizenz FTP-Upload lokaler Webserv er\n\nBPE 3 Netze und vernetzte Gesellschaft 14 Die Schülerinnen und Schüler beschreiben die Funktionsweise von Netzwerken und deren Rolle für die Gesellschaft.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-020",
+      "page_start": 8,
+      "page_end": 8,
+      "text": "BPE 3.1 Die Schülerinnen und Schüler identifizieren die zentralen Bestandteile eines Compute rnetzwerks und erläutern die grundlegenden Konzepte der Datenübertragung. Einsatzgebiete von Netzwerken z. B. Internet, Heimnetzwerk Client -Server -Prinzip Datenpakete, Adressierung, Wegfindung/Routing z. B. Veranschaulichung am Schulnetz, Simulationsso ftware, Laborunterricht Netzwerkkomponenten z. B. Switch, Router, Übertragungsmedien, Access -Point, Home -Router Speicherung von Daten in Netzwerken z. B. LAN, Cloud Verschlüsselung von Daten z. B. Public -Key-Verfahren Datensicherheit z. B. Schutz vor Z ugriff, Manipulation und Verlust",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-021",
+      "page_start": 9,
+      "page_end": 9,
+      "text": "Berufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc BPE 3.2 Die Schülerinnen und Schüler beurteilen die individuellen und gesellschaftlichen Chancen und Risiken der Nutzung von Netzwerken. Datenschutz persönliche Daten, unterschiedliche Rechtsnormen in verschiedenen Länd ern z. B. Landesdatenschutzgesetz (LDSG), Europäische Datenschutzgrundverordnung (EU - DSGVO) Privatsphäre Suchen von Daten verschiedene Suchmaschinentypen Bewerten von Suchergebnissen\n\nBPE 4 Darstellung von Informationen 6 Die Schülerinnen und Schü ler beurteilen die Codierung und Veränderung von Daten.",
+      "tags": [
+        "begruendung"
+      ]
+    },
+    {
+      "chunk_id": "chunk-022",
+      "page_start": 9,
+      "page_end": 10,
+      "text": "BPE 4.1 Die Schülerinnen und Schüler stellen Zahlen in unterschiedlichen Zahlensystemen dar und erklären deren Relevanz in der Informationstechnologie, z. B. bei der Codierung von Zeichen. Dezimal -, Binär -, Hexadezimalsystem z. B. RGB -Farbcode Bit und Byte ASCII -Code\n\nBPE 4.2 Die Schülerinnen und Schüler erklären die Möglichkeiten der Veränderung an einem exemplarischen Medieninhalt und beurteilen deren Relevanz. Aufbau einer Mediendatei z. B. Bild- oder Audiodatei Verändernde verborgene Eingriffe in die Codierung z. B. Steganographie, Metadaten Gesellschaftliche Auswirkungen von manipulierten Daten\n\nBerufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Jahrgangsstufe 1",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-023",
+      "page_start": 10,
+      "page_end": 10,
+      "text": "Vertiefung – Individualisiertes Lernen – Projektunterricht (VIP) 20 Vertiefung Individualisiertes Lernen Projektunterricht z. B. Übungen Anwendungen Wiederholungen z. B. Selbstorganisiertes Lernen Lernvereinbarungen Binnendifferenzierung z. B. Entwicklung, Erstellung und Nutzung einer eigenen Datenbank (Adressdatenbank, Vereinsdatenbank) Die Themenauswahl des Projektunterrichts hat aus den nachfolgenden Bildungsplaneinheiten unter Beachtung Fächer verbindender Aspekte zu erfolgen.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-024",
+      "page_start": 10,
+      "page_end": 10,
+      "text": "BPE 5 Grundlagen der Programmierung 20 Die Schülerinnen und Schüler verwenden grundlegende Elemente der Programmierung in einfachen Programmen und können Programmabläufe mit Hilfe von Struktogrammen dokumentieren. Es muss eine Programmiersprache Verwendung finden, mit der Programme am Gerät implementiert und getestet werden. Im Vordergrund steh t das Verständnis und zielgerichtete Einsetzen der Strukturen, eine Einführung über eine ikonische Programmiersprache zur Veranschaulichung und zur Fokussierung auf die Konzepte ist sinnvoll.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-025",
+      "page_start": 10,
+      "page_end": 10,
+      "text": "BPE 5.1 Die Schülerinnen und Schüler entwickeln und implementi eren Programme mit Benutzereingabe und -ausgabe sowie einfachen Berechnungen und wenden die dazu gehörigen Elemente eines Struktogramms an, um diese Programme zu dokumentieren bzw. ein Programm zu entwerfen. Variable – Deklaration – Initialisierung Nutzun g von Variablen – Zuweisen von Werten – Auslesen von Werten – Berechnen von Werten Unterprogramme z. B. Prozedur, Funktion, Methode – Übergabeparameter – Rückgabewert Eingabe, Verarbeitung und Ausgabe von Daten z. B. GUI, Konsole, HTML -Formular Erstellen vo n Struktogrammen zur Dokumentation von Programmabläufen Softwareunterstützung empfohlen",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-026",
+      "page_start": 10,
+      "page_end": 10,
+      "text": "BPE 5.2 Die Schülerinnen und Schüler entwickeln und implementieren eigene Programme unter Nutzung der Kontrollstrukturen Alternative und Wiederholung. Zur Entwicklung und Dokumentation ihrer Programmentwürfe erstellen die Schülerinnen und Schüler Struktogramme. Ein- und zweiseitige Alternativen, auch geschachtelt Logische Operatoren: AND, OR, NOT Einführung über ikonische Programmiersprache zur Veranschaulichung Wiederholungsstrukturen Einführung über ikonische Programmiersprache zur Veranschaulichung – zählergesteuerte Schleife – kopfgesteuerte Schleife Entwurf und Implementierung eigener Programme Erstellen von Struktogrammen zur Dokumentation von Programmabläufen",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-027",
+      "page_start": 11,
+      "page_end": 11,
+      "text": "Berufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc BPE 6 Relationale Datenbanken 30 Die Schülerinnen und Schüler erklären aufgrund der Analyse einer Situation der realen Welt die Notwendigkeit von Datenbanken. Sie entwickeln durch Abstraktion und Reduktion Datenmodelle in Form von Entity -Relationshi p- Modellen. Die Überführung der Modelle in ein Datenbanksystem erfolgt ebenso wie die Speicherung, Auswertung und Veränderung komplexer Datenbestände softwaregestützt.\n\nBPE 6.1 Die Schülerinnen und Schüler modellieren Aspekte der realen Welt durch ein Entity-Relationship -Modell. Entität Entitätstyp Attribut Beziehungen Kardinalität",
+      "tags": [
+        "eerm",
+        "relationale-datenbanken"
+      ]
+    },
+    {
+      "chunk_id": "chunk-028",
+      "page_start": 11,
+      "page_end": 11,
+      "text": "BPE 6.2 Die Schülerinnen und Schüler entwickeln auf der Grundlage eines Entity - Relationship -Modells ein Relationenmodell. Relation Datentyp: Text, Ganzzahl, Fließ kommazahl, Datum, Wahrheitswert Primärschlüssel Fremdschlüssel Redundanz 3. Normalform\n\nBPE 6.3 Die Schülerinnen und Schüler erstellen aus einem Relationenmodell eine relationale Datenbank mit mehreren Tabellen und wenden SQL -Statements zur Erfas sung von Daten an. Tabelle CREATE INSERT Datenkonsistenz Referentielle Integrität\n\nBPE 6.4 Die Schülerinnen und Schüler erstellen SQL -Statements zur Auswertung von Datenbeständen über mehrere Tabellen. SELECT Sortierung Bedingungen\n\nOpera toren: AND, OR, NOT Funktionen: SUM, COUNT, AVG, MIN, MAX, MONTH, YEAR Gruppierung",
+      "tags": [
+        "datenintegritaet",
+        "normalisierung",
+        "sql-dml",
+        "sql-select"
+      ]
+    },
+    {
+      "chunk_id": "chunk-029",
+      "page_start": 11,
+      "page_end": 12,
+      "text": "BPE 6.5 Die Schülerinnen und Schüler diskutieren die Chancen und Risiken der Speicherung von Massendaten. Personalisierte Daten Erkennen von Zusammenhängen z. B. B ewegungsdatenanalyse\n\nBerufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Jahrgangsstufe 2",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-030",
+      "page_start": 12,
+      "page_end": 12,
+      "text": "Vertiefung – Individualisiertes Lernen – Projektunterricht (VIP) 16 Vertiefung Individualisiertes Lernen Projektunterricht z. B. Übungen Anwendungen Wiederholungen z. B. Selbstorganisiertes Lernen Lernvereinbaru ngen Binnendifferenzierung z. B. Anwenden und Vergleichen von Verschlüsselungsalgorithmen Lösen von Optimierungsproblemen in Graphen (Dijkstra -Algorithmus, Breiten - und Tiefensuche) Die Themenauswahl des Projektunterrichts hat aus den nachfolgenden Bildun gsplaneinheiten unter Beachtung Fächer verbindender Aspekte zu erfolgen.\n\nBPE 7 Algorithmen und Datenstrukturen 30 Die Schülerinnen und Schüler beschreiben die Datenstrukturen Array, verkettete Liste, Stapelspeicher, Warteschlange und Baum. Unter Verwen dung einer Programmiersprache am Gerät implementieren die Schülerinnen und Schüler Arrays und wenden Such - und Sortieralgorithmen zur Problemlösung an.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-031",
+      "page_start": 12,
+      "page_end": 12,
+      "text": "BPE 7.1 Die Schülerinnen und Schüler beschreiben und implementieren eindimensionale Arrays. Sie entwer fen mit der Datenstruktur Array Algorithmen zur Problemlösung in einer Programmiersprache. Deklaration und Initialisierung eines Arrays Grundlagen von Arrays z. B. Länge des Arrays Zugriff auf Array -Felder – Index -Operator – Zugriff über Schleife\n\nBPE 7.2 Die Schülerinnen und Schüler erläutern Sortier - und Suchalgorithmen anhand der Datenstruktur Array. Sie wenden die Sortier - und Suchalgorithmen zur Lösung von Problemstellungen an und implementieren diese. Sortierung – Selection Sort – Bubble Sort Suche – Lineare Suche – Binäre Suche",
+      "tags": [
+        "sql-select"
+      ]
+    },
+    {
+      "chunk_id": "chunk-032",
+      "page_start": 13,
+      "page_end": 13,
+      "text": "Berufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc BPE 7.3 Die Schülerinnen und Schüler beschreiben und modellieren die dynamischen Datenstrukturen verkettete Liste, Stapelspeicher, Warteschlange und Baum sowie deren zentrale Bestandteile. Listen – Eigenschaften z. B. Anker, Knoten, Daten, Zeiger – Operationen z. B. Einfügen, Löschen Stapelspeicher z. B. Operationen Warteschlange z. B. Operationen Aufbau von Bäumen – geordnet – voll – vollständig Modellierung von Bäumen z. B. Stammbaum, Organigramm Binärbäume z. B. Eig enschaften eines Binärbaums\n\nBPE 8 Gesellschaftliche Aspekte 10 Die Schülerinnen und Schüler setzen sich mit den gesellschaftlichen Folgen der Durchdringung des Alltagslebens durch Algorithmen auseinander.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-033",
+      "page_start": 13,
+      "page_end": 13,
+      "text": "BPE 8.1 Die Schülerinnen und Schüler identifi zieren Bereiche in ihrem Leben, in denen Algorithmen einen wichtigen Einfluss haben. Informationsvorauswahl durch Algorithmen – Suchmaschinen – Soziale Netzwerke Entscheidungen durch Algorithmen z. B. autonomes Fahren, Bonitätsprüfungen, Auswahlverfahren\n\nBPE 8.2 Die Schülerinnen und Schüler beschreiben und entwerfen Modelle der Datenstruktur Graph als Darstellungsform ausgewählter lebensnaher Situationen. Eigenschaften von Graphen – Knoten und Kanten – Grad eines Knotens – Gerichtete und gewichtete Kanten – Weg und Kreis Modellierung von Graphen Einsatz von Graphen in der Praxis z. B. soziales Netzwerk, Verkehrsplan\n\nBPE 8.3 Die Schülerinnen und Schüler beurteilen die Chancen und Risiken des Einsatzes von Algorithmen anhand ausgewählter Beispiele. Chance n von Algorithmen z. B. künstliche Intelligenz Risiken von Algorithmen",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-034",
+      "page_start": 14,
+      "page_end": 14,
+      "text": "Berufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Operatorenliste\n\nIn den Zielformulierungen der Bildungsplaneinheiten werden Operatoren (= handlungsleitende Verben) verwendet. Diese Zielformulierungen (Standards) legen fest, welch e Anforderungen die Schülerinnen und Schüler in der Regel erfüllen. Zusammen mit der Zuordnung zu einem der drei Anforderungsbereiche (AFB) dienen Operatoren einer Präzisierung. Dies sichert das Erreichen des vorgesehenen Niveaus und die angemessenen Inter pretationen der Standards.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-035",
+      "page_start": 14,
+      "page_end": 14,
+      "text": "Anforderungsbereich I umfasst die Wiedergabe von bekannten Sachverhalten aus einem abgegrenzten Gebiet im gelernten Zusammenhang, die Beschreibung und Darstellung bekannter Verfahren, Methoden und Prinzipie n der Informatik, die Beschreibung und Verwendung gelernter und geübter Arbeitstechniken und Verfahrensweisen in einem begrenzten Gebiet und in einem wiederholenden Zusammenhang. Anforderungsbereich II umfasst die selbstständige Verwendung bekannter Sachve rhalte zur Bearbeitung neuer Frage - oder Problemstellungen unter vorgegebenen Gesichtspunkten in einem durch Übung bekannten Zusammenhang, die selbstständige Übertragung des Gelernten auf vergleichbare neue Situationen, wobei es um veränderte Fragestellung en, veränderte Sachzusammenhänge oder um abgewandelte Verfahrensweisen gehen kann, die Anwendung bekannter Verfahren, Methoden und Prinzipien der Informatik zur Lösung eines neuen Problems aus einem bekannten Problemkreis. Anforderungsbereich III umfasst d as planmäßige Verarbeiten komplexer Gegebenheiten mit dem Ziel, zu selbstständigen Gestaltungen bzw. Deutungen, Folgerungen, Begründungen, Wertungen zu gelangen, die bewusste und selbstständige Auswahl und Anpassung geeigneter gelernter Methoden und Verfah ren in neuartigen Situationen. Dabei werden aus gelernten Denkmethoden bzw. Lösungsverfahren die zur Bewältigung der Aufgabe geeigneten selbstständig ausgewählt und einer neuen Problemstellung angepasst.",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-036",
+      "page_start": 14,
+      "page_end": 14,
+      "text": "Operator Erläuterung Zuordnung AFB anwenden einen bekannten Sachverhalt, eine bekannte Methode auf eine neue Problemstellung beziehen I, II auswerten Daten, Einzelergebnisse oder Sachverhalte zu einer abschließenden Gesamtaussage zusammenführen II, III begründen für einen gegebenen Sachverhalt einen fol gerichtigen Zusammenhang zwischen Ursache und Wirkung herstellen II benennen, nennen Sachverhalte, Strukturen und Prozesse begrifflich aufführen I, II berechnen mittels charakteristischer Merkmale einen Sachverhalt genau feststellen und beschreiben I, II beschreiben Strukturen, Sachverhalte oder Zusammenhänge strukturiert und fachsprachlich richtig mit eigenen Worten wiedergeben I, II bestimmen einen Zusammenhang oder einen möglichen Lösungsweg aufzeigen und das Ergebnis formulieren II, III",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-037",
+      "page_start": 15,
+      "page_end": 15,
+      "text": "Berufliches Gymnasium der dreijährigen Aufbauform Erprobungsbildungsplan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Operator Erläuterung Zuordnung AFB beurteilen den Stellenwert von Sachverhalten oder Prozessen in einem Zusammenhang bestimmen, um kriterienorientiert zu einem begründeten Sachurteil zu gelangen III bezeichnen Sachverhalte, Strukturen und Prozesse erkennen und zutreffend formulieren I darstellen Zusammenhänge, Sachverhalte, Methoden etc. in strukturierter Form grafisch oder gegebenenfalls fachsprachlich wiedergeben I, II definieren einen Begriff exakt bestimmen, um ihn von anderen abzugrenzen II, III diskutiere n zu einem Sachverhalt, zu einem Konzept oder zu einer Problemstellung eine Argumentation entwickeln, die zu einer begründeten Bewertung führen II, III dokumentieren alle notwendigen Erklärungen, Herleitungen und Skizzen darstellen II, III einordnen einen Sachverhalt oder eine Aussage mit erläuternden Hinweisen in einen Zusammenhang stellen II, III Entwerfen, planen zusammenstellen von Funktionalitäten unter Berücksichtigung vorgegebener Daten II, III entwickeln zu einem Sachverhalt oder zu einer Proble mstellung ein konkretes Lösungsmodell oder ein Lösungskonzept begründend skizzieren II, III erklären, erläutern Strukturen, Prozesse und Zusammenhänge von Erscheinungen erfassen, in Einzelheiten verdeutlichen und durch zusätzliche Informationen verständli ch machen I, II ermitteln einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren I, II erstellen Darstellen von Sachverhalten gemäß vorgegebener Syntax II erweitern eine vorgegebene Struktur um Bestandteile ergänzen II, III identifizie ren, kennzeichnen das Wesentliche und Typische benennen II implementieren Algorithmen und Datenstrukturen in eine Programmiersprache umsetzen II kommentieren kausale Zusammenhänge anhand gegebener oder eigener Ergebnisse präzise vorstellen II, III modellieren zu einem Ausschnitt der Realität ein informatisches Modell anfertigen II, III skizzieren die wesentlichen Eigenschaften eines Objektes, eines Sachverhaltes oder einer Struktur grafisch darstellen I, II",
+      "tags": [
+        "eerm"
+      ]
+    },
+    {
+      "chunk_id": "chunk-038",
+      "page_start": 16,
+      "page_end": 16,
+      "text": "Berufliches Gymnasium der dreijährige n Aufbauform Erprobungs bildungs plan 44–6512. -2421/8 vom 12.04.2019 FB 4 10 .04.19/Ba BG2-AG-EG-SG-WG_Informatik_18_3992k.doc Operator Erläuterung Zuordnung AFB Stellung nehmen unter Heranziehung von Kenntnissen differenziert eine eigene begründete Position beziehen III überprüfen, testen Sachverhalte, Probleme, Fragestellungen nach bestimmen fachlich üblichen Kriterien untersuchen II, III übertragen einen bekannt en Sachverhalten, eine bekannte Methode auf eine neue Problemstellung beziehen II, III vervollständigen Sachverhalte, Ausdrücke oder Aussagen nach bereits vorliegenden Kriterien mit zusätzlichen Informationen versehen I, II zeichnen eine anschauliche und hinreichend exakte grafische Darstellung gegebener Strukturen anfertigen I, II",
+      "tags": []
+    },
+    {
+      "chunk_id": "chunk-039",
+      "page_start": 16,
+      "page_end": 16,
+      "text": "vgl. Einheitliche Prüfungs anforderungen in der Abiturprüfung Berufliche Informatik (Beschluss der KMK vom 01.12.1979 i. d. F. vom 10. 05.2007)",
+      "tags": [
+        "pruefung"
+      ]
+    }
+  ]
+}

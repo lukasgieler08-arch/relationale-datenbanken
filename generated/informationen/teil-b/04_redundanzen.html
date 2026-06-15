@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teil B - Redundanzen</title>
+  <style>
+    :root { --bg:#f5f7ff; --card:#fff; --text:#1e2240; --accent:#304ffe; --note:#ebeeff; --warn:#fff3e7; }
+    body { margin:0; font-family:"Segoe UI","Gill Sans",sans-serif; background:linear-gradient(130deg,#f5f7ff,#eefbf6); color:var(--text); }
+    .wrap { max-width:980px; margin:24px auto; padding:0 16px; }
+    .card { background:var(--card); border-radius:14px; padding:24px; box-shadow:0 8px 28px rgba(0,0,0,.08); }
+    h1,h2 { color:var(--accent); }
+    h2 { border-bottom:2px solid #dbe2ff; padding-bottom:6px; }
+    .note { background:var(--note); border-left:5px solid #304ffe; padding:12px; border-radius:8px; }
+    .warn { background:var(--warn); border-left:5px solid #d9822b; padding:12px; border-radius:8px; }
+    ul { line-height:1.55; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Teil B: Redundanzen</h1>
+
+      <h2>Was ist Redundanz?</h2>
+      <p>Dieselbe Information wird mehrfach gespeichert.</p>
+
+      <h2>Warum problematisch?</h2>
+      <ul>
+        <li>Änderungen müssen mehrfach durchgeführt werden.</li>
+        <li>Widersprüche zwischen Datensätzen entstehen leichter.</li>
+        <li>Anomalien (Einfügen, Ändern, Löschen) treten auf.</li>
+      </ul>
+
+      <h2>Beispiel Lernlabor</h2>
+      <p>Wenn WorkshopTitel in jeder TEILNAHME erneut gespeichert wird, entstehen unnötige Duplikate.</p>
+      <p>Besser: Titel nur in WORKSHOP speichern, TEILNAHME enthält nur Schlüssel.</p>
+
+      <div class="note"><strong>Merksatz:</strong> Eine Tatsache, ein Speicherort.</div>
+      <div class="warn"><strong>Typischer Fehler:</strong> Namen statt IDs für Verknüpfungen verwenden.</div>
+    </div>
+  </div>
+</body>
+</html>

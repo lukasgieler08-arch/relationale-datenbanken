@@ -1,0 +1,9 @@
+{
+  "project": "edu-code-projecttemplate",
+  "services": [
+    "mysql",
+    "python-api",
+    "php-web"
+  ],
+  "note": "JSON-Beispieldatenbank fuer Live-Tests"
+}

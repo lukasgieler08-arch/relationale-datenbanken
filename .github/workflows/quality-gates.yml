@@ -1,0 +1,47 @@
+name: quality-gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  policy-and-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Security policy checks
+        run: bash scripts/validate-security.sh
+      - name: Architecture policy checks
+        run: bash scripts/validate-architecture.sh
+      - name: Documentation policy checks
+        run: bash scripts/validate-docs.sh
+
+  python-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r services/python-api/requirements.txt ruff bandit
+      - name: Lint Python code
+        run: ruff check services/python-api
+      - name: Security scan Python code
+        run: bandit -q -r services/python-api
+
+  web-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: JavaScript syntax check
+        run: node --check webapp/public/app.js
+      - name: PHP syntax check
+        run: php -l webapp/public/index.php

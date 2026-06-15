@@ -1,0 +1,73 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: edu_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?MYSQL_DATABASE must be set}
+      MYSQL_USER: ${MYSQL_USER:?MYSQL_USER must be set}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD must be set}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p${MYSQL_ROOT_PASSWORD:?MYSQL_ROOT_PASSWORD must be set} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - appnet
+
+  python-api:
+    build:
+      context: ./services/python-api
+    container_name: edu_python_api
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST:?MYSQL_HOST must be set}
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?MYSQL_DATABASE must be set}
+      MYSQL_USER: ${MYSQL_USER:?MYSQL_USER must be set}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD must be set}
+      JSON_DB_PATH: /app/data.json
+      CURRICULUM_INDEX_PATH: /app/generated/lehrplaene/index.json
+    ports:
+      - "${PYTHON_API_PORT:-8000}:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./generated:/app/generated:ro
+    networks:
+      - appnet
+
+  php-web:
+    build:
+      context: ./webapp
+    container_name: edu_php_web
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST:?MYSQL_HOST must be set}
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:?MYSQL_DATABASE must be set}
+      MYSQL_USER: ${MYSQL_USER:?MYSQL_USER must be set}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?MYSQL_PASSWORD must be set}
+      PYTHON_API_URL: ${PYTHON_API_URL:-http://localhost:8000}
+    ports:
+      - "${PHP_WEB_PORT:-8080}:80"
+    depends_on:
+      - python-api
+    volumes:
+      - ./webapp/public:/var/www/html:rw
+    networks:
+      - appnet
+
+volumes:
+  mysql_data:
+
+networks:
+  appnet:
+    driver: bridge
