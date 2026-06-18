@@ -33,3 +33,6 @@ JOIN STANDORT s ON s.StandortID = e.StandortID;
 - Falsche Join-Spalten.
 - Alias vergessen oder uneinheitlich.
 - Filterbedingungen in ON und WHERE unklar mischen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

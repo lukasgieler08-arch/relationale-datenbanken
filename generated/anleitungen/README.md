@@ -13,3 +13,5 @@ Diese Seiten führen Schülerinnen und Schüler Schritt für Schritt durch die T
 - [Lösung VERSION1](../klassenarbeiten/KA02_BG12_2025_2026_VERSION1_lsg.md)
 - [Teil-B-Infosammlung](../informationen/teil-b/01_grundlagen_modellierung_eerm.md)
 - [Teil-C-Infosammlung](../informationen/teil-c/01_sql_abfragen_ueber_mehrere_tabellen.md)
+- [Stichwortverzeichnis Relationale Datenbanken](../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)
+- [Stichwortverzeichnis (suchbare HTML-Ansicht)](../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.html)

@@ -28,3 +28,6 @@ WHERE EinsatzID = 5001;
 - Falsche Reihenfolge bei abhängigen Datensätzen.
 - Löschung ohne Vorprüfung.
 - Fachlich wichtige Historie unabsichtlich entfernen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

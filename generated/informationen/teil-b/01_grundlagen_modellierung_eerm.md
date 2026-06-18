@@ -52,3 +52,6 @@ Gedankengang:
 - Hat jeder Entitätstyp einen PK?
 - Sind alle Beziehungen mit Kardinalitäten versehen?
 - Ist das Modell konsistent und eindeutig lesbar?
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

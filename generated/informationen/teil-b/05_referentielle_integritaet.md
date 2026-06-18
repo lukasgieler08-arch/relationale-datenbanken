@@ -46,3 +46,6 @@ Das führt zu fehlerhaften Auswertungen und unzuverlässigen Daten.
 Wenn ihr im EERM Beziehungen modelliert, denkt direkt mit:
 - Wo liegt später der Fremdschlüssel?
 - Welche Integritätsregel passt fachlich?
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

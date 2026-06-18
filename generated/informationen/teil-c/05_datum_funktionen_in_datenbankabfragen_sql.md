@@ -37,3 +37,6 @@ FROM EINSATZ;
 - Falscher Datentyp (TEXT statt DATE/DATETIME).
 - Unscharfe Zeiträume („ab heute“) ohne genaue Bedingung.
 - Jahres-/Monatsfilter ohne Indexbewusstsein bei großen Datenmengen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

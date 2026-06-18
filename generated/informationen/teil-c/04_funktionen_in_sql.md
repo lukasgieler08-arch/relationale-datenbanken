@@ -39,3 +39,6 @@ FROM FOODTRUCK;
 - Aggregat und Nicht-Aggregat ohne GROUP BY mischen.
 - Rundung zu früh durchführen.
 - Falsche Datentypannahmen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

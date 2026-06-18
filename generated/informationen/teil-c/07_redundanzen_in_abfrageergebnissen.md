@@ -36,3 +36,6 @@ JOIN EINSATZ e ON e.TruckID = f.TruckID;
 ## Typische Fehler
 - DISTINCT pauschal überall einsetzen.
 - Join-Logik nicht am Datenmodell prüfen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

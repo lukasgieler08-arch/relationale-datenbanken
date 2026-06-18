@@ -31,3 +31,6 @@ WHERE TruckID = 102;
 - Unscharfe Filterbedingungen.
 - Datentypverletzungen.
 - Geschäftslogik im Nachhinein „korrigieren“ statt vorher prüfen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

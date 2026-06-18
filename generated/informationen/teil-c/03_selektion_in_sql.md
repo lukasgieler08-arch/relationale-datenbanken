@@ -40,3 +40,6 @@ WHERE Kategorie = 'Vegan' AND Rating >= 4.5;
 - AND/OR ohne Klammern falsch kombinieren.
 - NULL mit = statt IS NULL prüfen.
 - Tippfehler in Literalen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

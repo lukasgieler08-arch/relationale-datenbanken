@@ -49,3 +49,6 @@ So wird jede Information an genau einer Stelle gepflegt (Single Source of Truth)
 - Welche Information taucht mehrfach auf?
 - Kann diese Information in einen eigenen Entitätstyp ausgelagert werden?
 - Sind Beziehungen über Schlüssel statt über Klartext modelliert?
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

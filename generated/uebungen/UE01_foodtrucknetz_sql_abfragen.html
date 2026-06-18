@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UE01 FoodTruckNetz – SQL-Abfragen üben</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --surface: #fff;
+      --text: #13263a;
+      --muted: #52667a;
+      --border: #d7e2ec;
+      --accent: #0a7d5c;
+      --accent2: #0b5fa5;
+      --gold: #b8860b;
+      --easy: #d4edda;
+      --easy-t: #155724;
+      --med: #fff3cd;
+      --med-t: #856404;
+      --hard: #f8d7da;
+      --hard-t: #721c24;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI","Calibri",sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 14px 48px; }
+    h1 { color: var(--accent2); margin: 0 0 6px; font-size: clamp(1.3rem,2.2vw,1.9rem); }
+    .subtitle { color: var(--muted); margin: 0 0 16px; font-size: .97rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: 0 8px 24px rgba(7,36,69,.07); margin-bottom: 14px; }
+    /* EERM */
+    .eerm-wrap { text-align: center; margin: 10px 0 16px; }
+    .eerm-wrap img { max-width: 100%; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+    .eerm-caption { font-size: .86rem; color: var(--muted); margin-top: 6px; }
+    /* Schema-Box */
+    .schema { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .schema-table { border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: .84rem; min-width: 160px; background: #f9fbff; }
+    .schema-table strong { display: block; color: var(--accent2); font-size: .9rem; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
+    .schema-table code { font-size: .8rem; color: #444; }
+    /* Übungskarte */
+    .exercise { border-left: 4px solid var(--accent2); }
+    .ex-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .ex-num { font-size: 1.1rem; font-weight: 700; color: var(--accent2); }
+    .badge { padding: 2px 9px; border-radius: 20px; font-size: .8rem; font-weight: 600; }
+    .easy { background: var(--easy); color: var(--easy-t); }
+    .med  { background: var(--med);  color: var(--med-t); }
+    .hard { background: var(--hard); color: var(--hard-t); }
+    .topic-badge { background: #e8edf5; color: #2c4a6e; padding: 2px 9px; border-radius: 20px; font-size: .79rem; }
+    .task { margin-bottom: 12px; }
+    .task strong { display: block; margin-bottom: 6px; font-size: 1rem; }
+    .hint { background: #fffbe6; border: 1px solid #f0d060; border-radius: 8px; padding: 7px 12px; font-size: .87rem; margin-bottom: 10px; }
+    /* SQL-Textarea */
+    .sql-label { font-weight: 600; font-size: .9rem; color: var(--muted); margin-bottom: 4px; }
+    textarea.sql-input { width: 100%; min-height: 100px; font-family: "Consolas","Courier New",monospace; font-size: .88rem; border: 1px solid var(--border); border-radius: 8px; padding: 10px; resize: vertical; background: #f7f9fc; color: #1a1a2e; outline: none; }
+    textarea.sql-input:focus { border-color: var(--accent2); box-shadow: 0 0 0 3px rgba(11,95,165,.12); }
+    /* Buttons */
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    button.reveal { border: 0; border-radius: 8px; padding: 7px 14px; font-size: .88rem; cursor: pointer; font-weight: 600; }
+    button.btn-sol  { background: #e8f4f1; color: var(--accent); }
+    button.btn-res  { background: #e9f0fb; color: var(--accent2); }
+    button.btn-hint { background: #fffbe6; color: var(--gold); }
+    button.reveal:hover { opacity: .85; }
+    /* Lösung / Ergebnis */
+    .hidden { display: none; }
+    .sol-box { background: #f0f8f5; border: 1px solid #b0ddd1; border-radius: 8px; padding: 12px; margin-top: 10px; }
+    .sol-box pre { margin: 0; font-family: "Consolas","Courier New",monospace; font-size: .86rem; white-space: pre-wrap; word-break: break-word; color: #0d3b2e; }
+    .res-box { margin-top: 10px; overflow: auto; }
+    .res-box table { border-collapse: collapse; font-size: .86rem; min-width: 400px; }
+    .res-box th { background: #eff5fb; color: #17324b; font-weight: 700; padding: 6px 10px; border: 1px solid var(--border); text-align: left; }
+    .res-box td { padding: 5px 10px; border: 1px solid var(--border); }
+    .res-box tr:nth-child(even) td { background: #f7fafe; }
+    .row-count { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+    /* Navigation */
+    .nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; font-size: .9rem; }
+    .nav a { color: var(--accent2); text-decoration: none; font-weight: 600; }
+    .nav a:hover { text-decoration: underline; }
+    .legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: .84rem; margin-bottom: 14px; }
+    .legend span { padding: 3px 10px; border-radius: 12px; }
+    hr { border: 0; border-top: 1px solid var(--border); margin: 14px 0; }
+    @media (max-width: 600px) { .card { padding: 12px; } }
+  </style>
+</head>
+<body>
+<main class="wrap">
+
+  <h1>Übungsblatt UE01 – SQL-Abfragen: FoodTruckNetz</h1>
+  <p class="subtitle">10 Aufgaben · Kontext: FoodTruckNetz (foodtrucknetzdb_2025) · Themen: JOIN, WHERE, AND/OR, ORDER BY, GROUP BY, HAVING, Aggregatfunktionen, Datumsfunktionen</p>
+
+  <div class="nav">
+    <a href="../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.html">📖 Stichwortverzeichnis öffnen</a>
+    <a href="UE02_stadtfahrradverleih_sql_abfragen.html">➜ Übungsblatt UE02 (Stadtfahrradverleih)</a>
+    <a href="README.md">← Übersicht</a>
+  </div>
+
+  <div class="legend">
+    <span class="badge easy">★☆☆ Einfach</span>
+    <span class="badge med">★★☆ Mittel</span>
+    <span class="badge hard">★★★ Anspruchsvoll</span>
+  </div>
+
+  <!-- EERM -->
+  <div class="card">
+    <h2 style="margin-top:0;color:var(--accent2);">EERM: FoodTruckNetz</h2>
+    <p style="color:var(--muted);font-size:.92rem;">Analysiere das Datenbankmodell bevor du eine Abfrage schreibst. Erkenne welche Tabellen du verbinden musst (JOINs) und über welche Schlüssel.</p>
+    <div class="eerm-wrap">
+      <img src="../klassenarbeiten/foodtrucknetz_2025.png" alt="EERM FoodTruckNetz" loading="lazy">
+      <p class="eerm-caption">EERM FoodTruckNetz – foodtrucknetzdb_2025 (6 Entitätstypen in 3NF)</p>
+    </div>
+  </div>
+
+  <!-- Schema-Referenz -->
+  <div class="card">
+    <h3 style="margin-top:0;color:var(--accent2);">Schema-Kurzreferenz</h3>
+    <div class="schema">
+      <div class="schema-table"><strong>kunden</strong><code>kunde_id, vorname, nachname, bonuslevel (Bronze/Silber/Gold), registriert_am, aktiv</code></div>
+      <div class="schema-table"><strong>standorte</strong><code>standort_id, standortname, stadtteil, aktiv</code></div>
+      <div class="schema-table"><strong>trucks</strong><code>truck_id, standort_id⟶standorte, truckname, status (offen/pause/wartung)</code></div>
+      <div class="schema-table"><strong>produkte</strong><code>produkt_id, truck_id⟶trucks, produktname, kategorie, preis, verfuegbar</code></div>
+      <div class="schema-table"><strong>bestellungen</strong><code>bestellung_id, kunde_id⟶kunden, truck_id⟶trucks, produkt_id⟶produkte, bestellt_am, status (neu/abgeschlossen/storniert)</code></div>
+      <div class="schema-table"><strong>zahlungen</strong><code>zahlung_id, bestellung_id⟶bestellungen, betrag, zahlart (Karte/App/Bar), bezahlt_am, status (offen/bezahlt/erstattet)</code></div>
+    </div>
+    <p style="font-size:.84rem;color:var(--muted);margin:0;">Datenbasis: <code>daten/foodtrucknetz_uebung_daten.sql</code> (25 Bestellungen, 22 Zahlungen, März–Mai 2025)</p>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- AUFGABE 1 -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="card exercise" id="a1">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 1</span>
+      <span class="badge easy">★☆☆ Einfach</span>
+      <span class="topic-badge">WHERE · OR · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Aktive Premium-Kunden</strong>
+      Gib alle <em>aktiven</em> Kunden (aktiv = 1) aus, die das Bonuslevel <strong>'Gold'</strong> ODER <strong>'Silber'</strong> haben.
+      Ausgabe: Vorname, Nachname, Bonuslevel, Registrierungsdatum.
+      Sortiere aufsteigend nach Bonuslevel, dann nach Nachname.
+    </div>
+    <div class="hint">💡 Tipp: Kombiniere die OR-Bedingung immer mit Klammern, damit AND nicht vor OR ausgewertet wird.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT ...&#10;FROM kunden&#10;WHERE ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol1')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res1')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol1" class="sol-box hidden"><pre>SELECT vorname, nachname, bonuslevel, registriert_am
+FROM kunden
+WHERE aktiv = 1
+  AND (bonuslevel = 'Gold' OR bonuslevel = 'Silber')
+ORDER BY bonuslevel ASC, nachname ASC;</pre></div>
+    <div id="res1" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>bonuslevel</th><th>registriert_am</th></tr>
+        <tr><td>Tara</td><td>Fuchs</td><td>Gold</td><td>2024-05-01</td></tr>
+        <tr><td>Mara</td><td>Klein</td><td>Gold</td><td>2024-01-08</td></tr>
+        <tr><td>Quin</td><td>Roth</td><td>Gold</td><td>2024-03-10</td></tr>
+        <tr><td>Willi</td><td>Braun</td><td>Gold</td><td>2024-08-05</td></tr>
+        <tr><td>Nico</td><td>Brandt</td><td>Silber</td><td>2024-01-15</td></tr>
+        <tr><td>Sven</td><td>Koch</td><td>Silber</td><td>2024-04-15</td></tr>
+        <tr><td>Pia</td><td>Lorenz</td><td>Silber</td><td>2024-02-21</td></tr>
+        <tr><td>Vera</td><td>Schubert</td><td>Silber</td><td>2024-07-22</td></tr>
+      </table>
+      <p class="row-count">8 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 2 -->
+  <div class="card exercise" id="a2">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 2</span>
+      <span class="badge easy">★☆☆ Einfach</span>
+      <span class="topic-badge">YEAR() · MONTH() · JOIN · WHERE</span>
+    </div>
+    <div class="task">
+      <strong>Bestellungen im April 2025</strong>
+      Zeige alle <em>abgeschlossenen</em> Bestellungen, die im <strong>April 2025</strong> aufgegeben wurden.
+      Ausgabe: Bestellnummer, Vorname, Nachname, Produktname, Datum (bestellt_am).
+      Sortiere nach Datum aufsteigend.
+    </div>
+    <div class="hint">💡 Tipp: <code>YEAR(spalte) = 2025 AND MONTH(spalte) = 4</code> filtert sicher nach Monat.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT ...&#10;FROM bestellungen b&#10;JOIN kunden k ...&#10;WHERE ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol2')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res2')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol2" class="sol-box hidden"><pre>SELECT b.bestellung_id, k.vorname, k.nachname, p.produktname, b.bestellt_am
+FROM bestellungen b
+JOIN kunden  k ON k.kunde_id   = b.kunde_id
+JOIN produkte p ON p.produkt_id = b.produkt_id
+WHERE YEAR(b.bestellt_am)  = 2025
+  AND MONTH(b.bestellt_am) = 4
+  AND b.status = 'abgeschlossen'
+ORDER BY b.bestellt_am ASC;</pre></div>
+    <div id="res2" class="res-box hidden">
+      <table>
+        <tr><th>bestellung_id</th><th>vorname</th><th>nachname</th><th>produktname</th><th>bestellt_am</th></tr>
+        <tr><td>3006</td><td>Sven</td><td>Koch</td><td>Pommes Box</td><td>2025-04-01 11:00:00</td></tr>
+        <tr><td>3007</td><td>Tara</td><td>Fuchs</td><td>Veggie Bowl</td><td>2025-04-02 12:30:00</td></tr>
+        <tr><td>3008</td><td>Mara</td><td>Klein</td><td>Linsensuppe</td><td>2025-04-03 13:15:00</td></tr>
+        <tr><td>3010</td><td>Omar</td><td>Saad</td><td>Falafel Wrap</td><td>2025-04-05 10:20:00</td></tr>
+        <tr><td>3011</td><td>Pia</td><td>Lorenz</td><td>Veggie Bowl</td><td>2025-04-06 14:00:00</td></tr>
+      </table>
+      <p class="row-count">5 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 3 -->
+  <div class="card exercise" id="a3">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 3</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">SUM · JOIN · GROUP BY · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Gesamtumsatz pro Truck</strong>
+      Berechne den <strong>Gesamtumsatz</strong> (Summe aller bezahlten Zahlungsbeträge) je Truck.
+      Ausgabe: Truckname, Standortname, Gesamtumsatz.
+      Sortiere absteigend nach Gesamtumsatz.
+    </div>
+    <div class="hint">💡 Tipp: Du benötigst 4 Tabellen: zahlungen → bestellungen → trucks → standorte.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT t.truckname, ...&#10;FROM zahlungen z&#10;JOIN bestellungen b ...&#10;GROUP BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol3')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res3')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol3" class="sol-box hidden"><pre>SELECT t.truckname, s.standortname, SUM(z.betrag) AS gesamtumsatz
+FROM zahlungen z
+JOIN bestellungen b ON b.bestellung_id = z.bestellung_id
+JOIN trucks      t ON t.truck_id       = b.truck_id
+JOIN standorte   s ON s.standort_id    = t.standort_id
+WHERE z.status = 'bezahlt'
+GROUP BY t.truck_id, t.truckname, s.standortname
+ORDER BY gesamtumsatz DESC;</pre></div>
+    <div id="res3" class="res-box hidden">
+      <table>
+        <tr><th>truckname</th><th>standortname</th><th>gesamtumsatz</th></tr>
+        <tr><td>Urban Bites</td><td>Innenstadt</td><td>61.00</td></tr>
+        <tr><td>Campus Curry</td><td>Campuspark</td><td>57.80</td></tr>
+        <tr><td>Lake Tacos</td><td>Seepromenade</td><td>24.80</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 4 -->
+  <div class="card exercise" id="a4">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 4</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">COUNT · GROUP BY · HAVING</span>
+    </div>
+    <div class="task">
+      <strong>Stammkunden (mindestens 2 Bestellungen)</strong>
+      Welche Kunden haben <strong>mindestens 2 abgeschlossene</strong> Bestellungen aufgegeben?
+      Ausgabe: Vorname, Nachname, Anzahl Bestellungen.
+      Sortiere absteigend nach Anzahl, dann alphabetisch nach Nachname.
+    </div>
+    <div class="hint">💡 Tipp: WHERE filtert Zeilen vor der Gruppierung. HAVING filtert Gruppen danach. Hier brauchst du HAVING.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT k.vorname, ...&#10;FROM kunden k&#10;JOIN bestellungen b ...&#10;WHERE ...&#10;GROUP BY ...&#10;HAVING ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol4')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res4')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol4" class="sol-box hidden"><pre>SELECT k.vorname, k.nachname, COUNT(b.bestellung_id) AS anzahl_bestellungen
+FROM kunden k
+JOIN bestellungen b ON b.kunde_id = k.kunde_id
+WHERE b.status = 'abgeschlossen'
+GROUP BY k.kunde_id, k.vorname, k.nachname
+HAVING COUNT(b.bestellung_id) >= 2
+ORDER BY anzahl_bestellungen DESC, k.nachname ASC;</pre></div>
+    <div id="res4" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>anzahl_bestellungen</th></tr>
+        <tr><td>Mara</td><td>Klein</td><td>4</td></tr>
+        <tr><td>Tara</td><td>Fuchs</td><td>2</td></tr>
+        <tr><td>Pia</td><td>Lorenz</td><td>2</td></tr>
+        <tr><td>Quin</td><td>Roth</td><td>2</td></tr>
+        <tr><td>Omar</td><td>Saad</td><td>2</td></tr>
+      </table>
+      <p class="row-count">5 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 5 -->
+  <div class="card exercise" id="a5">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 5</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">AVG · GROUP BY · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Durchschnittspreis je Produktkategorie</strong>
+      Berechne den <strong>Durchschnittspreis</strong> aller Produkte je Kategorie (auf 2 Nachkommastellen runden).
+      Zeige auch die Anzahl der Produkte pro Kategorie.
+      Sortiere absteigend nach Durchschnittspreis.
+    </div>
+    <div class="hint">💡 Tipp: <code>ROUND(AVG(preis), 2)</code> rundet auf 2 Stellen. Die Tabelle <code>produkte</code> reicht hier aus – kein JOIN nötig.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT kategorie, ...&#10;FROM produkte&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol5')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res5')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol5" class="sol-box hidden"><pre>SELECT kategorie,
+       ROUND(AVG(preis), 2) AS durchschnittspreis,
+       COUNT(produkt_id)    AS anzahl_produkte
+FROM produkte
+GROUP BY kategorie
+ORDER BY durchschnittspreis DESC;</pre></div>
+    <div id="res5" class="res-box hidden">
+      <table>
+        <tr><th>kategorie</th><th>durchschnittspreis</th><th>anzahl_produkte</th></tr>
+        <tr><td>Bowl</td><td>8.20</td><td>1</td></tr>
+        <tr><td>Wrap</td><td>7.50</td><td>1</td></tr>
+        <tr><td>Taco</td><td>6.50</td><td>2</td></tr>
+        <tr><td>Suppe</td><td>5.60</td><td>1</td></tr>
+        <tr><td>Snack</td><td>4.00</td><td>1</td></tr>
+      </table>
+      <p class="row-count">5 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 6 -->
+  <div class="card exercise" id="a6">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 6</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">WHERE · AND · OR · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Gold-Kunden oder Neukunden ab Juli 2024</strong>
+      Liste alle <em>aktiven</em> Kunden auf, die entweder Bonuslevel <strong>'Gold'</strong> haben
+      ODER sich <strong>nach dem 01.07.2024</strong> registriert haben.
+      Ausgabe: Vorname, Nachname, Bonuslevel, Registrierungsdatum.
+      Sortiere nach Bonuslevel, dann nach Registrierungsdatum.
+    </div>
+    <div class="hint">💡 Tipp: Achte auf Klammerung: <code>aktiv = 1 AND (bonuslevel = 'Gold' OR registriert_am &gt; '2024-07-01')</code></div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT ...&#10;FROM kunden&#10;WHERE aktiv = 1 AND (... OR ...)&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol6')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res6')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol6" class="sol-box hidden"><pre>SELECT vorname, nachname, bonuslevel, registriert_am
+FROM kunden
+WHERE aktiv = 1
+  AND (bonuslevel = 'Gold' OR registriert_am > '2024-07-01')
+ORDER BY bonuslevel ASC, registriert_am ASC;</pre></div>
+    <div id="res6" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>bonuslevel</th><th>registriert_am</th></tr>
+        <tr><td>Xenia</td><td>Mueller</td><td>Bronze</td><td>2024-09-18</td></tr>
+        <tr><td>Mara</td><td>Klein</td><td>Gold</td><td>2024-01-08</td></tr>
+        <tr><td>Quin</td><td>Roth</td><td>Gold</td><td>2024-03-10</td></tr>
+        <tr><td>Tara</td><td>Fuchs</td><td>Gold</td><td>2024-05-01</td></tr>
+        <tr><td>Willi</td><td>Braun</td><td>Gold</td><td>2024-08-05</td></tr>
+        <tr><td>Vera</td><td>Schubert</td><td>Silber</td><td>2024-07-22</td></tr>
+      </table>
+      <p class="row-count">6 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 7 -->
+  <div class="card exercise" id="a7">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 7</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">MONTH() · GROUP BY · COUNT · SUM</span>
+    </div>
+    <div class="task">
+      <strong>Monatliche Bestellauswertung 2025</strong>
+      Wie viele <em>abgeschlossene</em> Bestellungen wurden pro Monat (2025) aufgegeben
+      und welcher Gesamtumsatz (bezahlte Zahlungen) wurde pro Monat erzielt?
+      Ausgabe: Monat, Anzahl Bestellungen, Gesamtumsatz.
+      Sortiere nach Monat aufsteigend.
+    </div>
+    <div class="hint">💡 Tipp: Du verbindest <code>bestellungen</code> mit <code>zahlungen</code>. Filtere auf <code>status = 'abgeschlossen'</code> UND <code>YEAR(...) = 2025</code>. Gruppiere nach <code>MONTH(bestellt_am)</code>.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT MONTH(b.bestellt_am) AS monat, ...&#10;FROM bestellungen b&#10;JOIN zahlungen z ...&#10;WHERE ...&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol7')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res7')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol7" class="sol-box hidden"><pre>SELECT MONTH(b.bestellt_am)  AS monat,
+       COUNT(b.bestellung_id) AS anzahl_bestellungen,
+       SUM(z.betrag)          AS gesamtumsatz
+FROM bestellungen b
+JOIN zahlungen z ON z.bestellung_id = b.bestellung_id
+WHERE b.status = 'abgeschlossen'
+  AND z.status = 'bezahlt'
+  AND YEAR(b.bestellt_am) = 2025
+GROUP BY MONTH(b.bestellt_am)
+ORDER BY monat ASC;</pre></div>
+    <div id="res7" class="res-box hidden">
+      <table>
+        <tr><th>monat</th><th>anzahl_bestellungen</th><th>gesamtumsatz</th></tr>
+        <tr><td>3</td><td>5</td><td>35.40</td></tr>
+        <tr><td>4</td><td>5</td><td>33.50</td></tr>
+        <tr><td>5</td><td>12</td><td>74.70</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 8 -->
+  <div class="card exercise" id="a8">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 8</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">GROUP BY (mehrere Spalten) · COUNT · SUM · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Umsatz je Truck und Zahlart</strong>
+      Erstelle eine Übersicht: Wie viele Zahlungen wurden je <strong>Truck und Zahlart</strong> abgewickelt
+      und wie hoch ist der jeweilige Gesamtbetrag?
+      Ausgabe: Truckname, Zahlart, Anzahl Zahlungen, Gesamtbetrag.
+      Sortiere nach Truckname, dann nach Zahlart (beide aufsteigend).
+    </div>
+    <div class="hint">💡 Tipp: Wenn du nach mehreren Spalten gruppierst, müssen <strong>alle</strong> Nicht-Aggregat-Spalten im GROUP BY stehen.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT t.truckname, z.zahlart, ...&#10;FROM zahlungen z&#10;JOIN ...&#10;GROUP BY t.truckname, z.zahlart&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol8')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res8')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol8" class="sol-box hidden"><pre>SELECT t.truckname,
+       z.zahlart,
+       COUNT(z.zahlung_id)  AS anzahl_zahlungen,
+       SUM(z.betrag)        AS gesamtbetrag
+FROM zahlungen z
+JOIN bestellungen b ON b.bestellung_id = z.bestellung_id
+JOIN trucks       t ON t.truck_id      = b.truck_id
+WHERE z.status = 'bezahlt'
+GROUP BY t.truck_id, t.truckname, z.zahlart
+ORDER BY t.truckname ASC, z.zahlart ASC;</pre></div>
+    <div id="res8" class="res-box hidden">
+      <table>
+        <tr><th>truckname</th><th>zahlart</th><th>anzahl_zahlungen</th><th>gesamtbetrag</th></tr>
+        <tr><td>Campus Curry</td><td>App</td><td>2</td><td>13.80</td></tr>
+        <tr><td>Campus Curry</td><td>Bar</td><td>3</td><td>19.40</td></tr>
+        <tr><td>Campus Curry</td><td>Karte</td><td>3</td><td>24.60</td></tr>
+        <tr><td>Lake Tacos</td><td>App</td><td>2</td><td>12.40</td></tr>
+        <tr><td>Lake Tacos</td><td>Bar</td><td>1</td><td>6.20</td></tr>
+        <tr><td>Lake Tacos</td><td>Karte</td><td>1</td><td>6.20</td></tr>
+        <tr><td>Urban Bites</td><td>App</td><td>4</td><td>19.50</td></tr>
+        <tr><td>Urban Bites</td><td>Bar</td><td>2</td><td>11.50</td></tr>
+        <tr><td>Urban Bites</td><td>Karte</td><td>4</td><td>30.00</td></tr>
+      </table>
+      <p class="row-count">9 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 9 -->
+  <div class="card exercise" id="a9">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 9</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">MAX · GROUP BY · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Höchste Zahlung pro Kunde</strong>
+      Was war der <strong>höchste Zahlungsbetrag</strong>, den jeder Kunde in einer einzelnen Transaktion geleistet hat?
+      Ausgabe: Vorname, Nachname, Bonuslevel, Höchstbetrag.
+      Nur Kunden mit mindestens einer Zahlung anzeigen.
+      Sortiere absteigend nach Höchstbetrag, dann alphabetisch nach Nachname.
+    </div>
+    <div class="hint">💡 Tipp: <code>MAX(z.betrag)</code> mit GROUP BY über die Kunden-ID liefert den höchsten Betrag pro Person.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT k.vorname, k.nachname, k.bonuslevel, MAX(z.betrag) AS ...&#10;FROM kunden k&#10;JOIN ...&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol9')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res9')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol9" class="sol-box hidden"><pre>SELECT k.vorname, k.nachname, k.bonuslevel,
+       MAX(z.betrag) AS hoechstbetrag
+FROM kunden k
+JOIN bestellungen b ON b.kunde_id      = k.kunde_id
+JOIN zahlungen    z ON z.bestellung_id = b.bestellung_id
+WHERE z.status = 'bezahlt'
+GROUP BY k.kunde_id, k.vorname, k.nachname, k.bonuslevel
+ORDER BY hoechstbetrag DESC, k.nachname ASC;</pre></div>
+    <div id="res9" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>bonuslevel</th><th>hoechstbetrag</th></tr>
+        <tr><td>Tara</td><td>Fuchs</td><td>Gold</td><td>8.20</td></tr>
+        <tr><td>Mara</td><td>Klein</td><td>Gold</td><td>8.20</td></tr>
+        <tr><td>Pia</td><td>Lorenz</td><td>Silber</td><td>8.20</td></tr>
+        <tr><td>Quin</td><td>Roth</td><td>Gold</td><td>8.20</td></tr>
+        <tr><td>Vera</td><td>Schubert</td><td>Silber</td><td>8.20</td></tr>
+        <tr><td>Willi</td><td>Braun</td><td>Gold</td><td>7.50</td></tr>
+        <tr><td>Omar</td><td>Saad</td><td>Bronze</td><td>7.50</td></tr>
+        <tr><td>Sven</td><td>Koch</td><td>Silber</td><td>6.20</td></tr>
+        <tr><td>Rina</td><td>Pham</td><td>Bronze</td><td>6.20</td></tr>
+        <tr><td>Xenia</td><td>Mueller</td><td>Bronze</td><td>5.60</td></tr>
+        <tr><td>Nico</td><td>Brandt</td><td>Silber</td><td>4.00</td></tr>
+      </table>
+      <p class="row-count">11 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 10 -->
+  <div class="card exercise" id="a10">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 10</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">AVG · GROUP BY · HAVING · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Trucks mit hohem Durchschnittsbetrag (HAVING)</strong>
+      Welche Trucks haben einen <strong>durchschnittlichen Zahlungsbetrag von mehr als 6,00 €</strong>?
+      Ausgabe: Truckname, Anzahl Zahlungen, Durchschnittsbetrag (2 Nachkommastellen).
+      Sortiere absteigend nach Durchschnittsbetrag.
+    </div>
+    <div class="hint">💡 Tipp: <code>HAVING AVG(z.betrag) &gt; 6</code> filtert Gruppen nach dem Gruppierwert – das geht nicht mit WHERE.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT t.truckname, COUNT(...), ROUND(AVG(...), 2) AS ...&#10;FROM zahlungen z&#10;JOIN ...&#10;GROUP BY ...&#10;HAVING AVG(...) > 6&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol10')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res10')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol10" class="sol-box hidden"><pre>SELECT t.truckname,
+       COUNT(z.zahlung_id)     AS anzahl_zahlungen,
+       ROUND(AVG(z.betrag), 2) AS durchschnitt
+FROM zahlungen z
+JOIN bestellungen b ON b.bestellung_id = z.bestellung_id
+JOIN trucks       t ON t.truck_id      = b.truck_id
+WHERE z.status = 'bezahlt'
+GROUP BY t.truck_id, t.truckname
+HAVING AVG(z.betrag) > 6
+ORDER BY durchschnitt DESC;</pre></div>
+    <div id="res10" class="res-box hidden">
+      <table>
+        <tr><th>truckname</th><th>anzahl_zahlungen</th><th>durchschnitt</th></tr>
+        <tr><td>Campus Curry</td><td>8</td><td>7.23</td></tr>
+        <tr><td>Lake Tacos</td><td>4</td><td>6.20</td></tr>
+        <tr><td>Urban Bites</td><td>10</td><td>6.10</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen (Urban Bites 6,10 &gt; 6 ✓)</p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('hidden');
+  const btn = document.querySelector(`button[onclick="toggle('${id}')"]`);
+  if (btn) btn.textContent = el.classList.contains('hidden')
+    ? (id.startsWith('sol') ? '✔ Musterlösung' : '📋 Erwartetes Ergebnis')
+    : (id.startsWith('sol') ? '✖ Musterlösung verbergen' : '✖ Ergebnis verbergen');
+}
+</script>
+</body>
+</html>

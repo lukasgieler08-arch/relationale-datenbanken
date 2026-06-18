@@ -33,3 +33,6 @@ HAVING COUNT(*) >= 5;
 - GROUP BY erzeugt Auswertungseinheiten.
 - Aggregatfunktionen ohne GROUP BY liefern eine Gesamtsicht.
 - HAVING prüft Gruppenbedingungen.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

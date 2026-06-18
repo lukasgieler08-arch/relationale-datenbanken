@@ -11,6 +11,8 @@ Diese Anleitung hilft dir, die Lösung schrittweise selbst zu erarbeiten. Sie er
 - [Normalisierung bis 3NF](../informationen/teil-b/03_normalisierung_bis_3nf.md)
 - [Redundanzen](../informationen/teil-b/04_redundanzen.md)
 - [Referentielle Integrität](../informationen/teil-b/05_referentielle_integritaet.md)
+- [Stichwortverzeichnis Relationale Datenbanken](../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)
+- [Stichwortverzeichnis (suchbare HTML-Ansicht)](../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.html)
 - [Workbench-Workflow](../klassenarbeiten/WORKBENCH-MWB-WORKFLOW.md)
 
 ## 1. Sachverhalt in Fachbegriffe zerlegen

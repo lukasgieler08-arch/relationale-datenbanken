@@ -34,3 +34,6 @@ FROM STANDORT;
 - Projektion und Filter verwechseln.
 - Zu viele Spalten auswählen.
 - DISTINCT einsetzen, um Modellfehler zu kaschieren.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

@@ -226,6 +226,14 @@ Alle Änderungen werden protokolliert durch:
 - Regelmäßige Snapshots
 - Konflikt-Auflösungs-Verfahren
 
+### 6.4 Template-Synchronisation
+
+Dieses Repository wird auch als Template für Student-Repositories verwendet. Dafür gilt:
+
+- Änderungen in `generated/uebungen/` und den übrigen verfolgten Template-Dateien sind Teil der Versionierung und werden mit dem nächsten Sync verteilt.
+- Der Workflow `.github/workflows/template-sync-pr.yml` prüft regelmäßig das Upstream-Repository.
+- Bei konfliktfreien Änderungen wird direkt auf `main` gepusht; wenn Branch-Schutzregeln das verhindern, wird automatisch ein Pull Request erstellt.
+
 ---
 
 ## 7. Performance & Skalierbarkeit

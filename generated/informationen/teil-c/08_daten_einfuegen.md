@@ -29,3 +29,6 @@ VALUES (1, 'Kiel'), (2, 'Luebeck');
 - Fehlende Pflichtspalten.
 - Falsche Datumsformate.
 - Fremdschlüssel auf nicht existente Datensätze.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

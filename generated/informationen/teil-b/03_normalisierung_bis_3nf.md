@@ -61,3 +61,6 @@ Lösung:
 - 2NF ohne zusammengesetzten Schlüssel prüfen.
 - 3NF mit 2NF verwechseln.
 - Zu früh technisch denken statt fachlich.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

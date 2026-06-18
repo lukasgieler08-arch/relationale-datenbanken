@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UE02 Stadtfahrradverleih – SQL-Abfragen üben</title>
+  <style>
+    :root {
+      --bg: #f4f7fb; --surface: #fff; --text: #13263a; --muted: #52667a;
+      --border: #d7e2ec; --accent: #0a7d5c; --accent2: #0b5fa5; --gold: #b8860b;
+      --easy: #d4edda; --easy-t: #155724; --med: #fff3cd; --med-t: #856404;
+      --hard: #f8d7da; --hard-t: #721c24;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI","Calibri",sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 20px 14px 48px; }
+    h1 { color: var(--accent2); margin: 0 0 6px; font-size: clamp(1.3rem,2.2vw,1.9rem); }
+    .subtitle { color: var(--muted); margin: 0 0 16px; font-size: .97rem; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; box-shadow: 0 8px 24px rgba(7,36,69,.07); margin-bottom: 14px; }
+    .eerm-wrap { text-align: center; margin: 10px 0 16px; }
+    .eerm-wrap img { max-width: 100%; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,.1); }
+    .eerm-caption { font-size: .86rem; color: var(--muted); margin-top: 6px; }
+    .schema { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .schema-table { border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: .84rem; min-width: 160px; background: #f9fbff; }
+    .schema-table strong { display: block; color: var(--accent2); font-size: .9rem; border-bottom: 1px solid var(--border); padding-bottom: 4px; margin-bottom: 4px; }
+    .schema-table code { font-size: .8rem; color: #444; }
+    .exercise { border-left: 4px solid var(--accent2); }
+    .ex-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .ex-num { font-size: 1.1rem; font-weight: 700; color: var(--accent2); }
+    .badge { padding: 2px 9px; border-radius: 20px; font-size: .8rem; font-weight: 600; }
+    .easy { background: var(--easy); color: var(--easy-t); }
+    .med  { background: var(--med);  color: var(--med-t); }
+    .hard { background: var(--hard); color: var(--hard-t); }
+    .topic-badge { background: #e8edf5; color: #2c4a6e; padding: 2px 9px; border-radius: 20px; font-size: .79rem; }
+    .task { margin-bottom: 12px; }
+    .task strong { display: block; margin-bottom: 6px; font-size: 1rem; }
+    .hint { background: #fffbe6; border: 1px solid #f0d060; border-radius: 8px; padding: 7px 12px; font-size: .87rem; margin-bottom: 10px; }
+    .sql-label { font-weight: 600; font-size: .9rem; color: var(--muted); margin-bottom: 4px; }
+    textarea.sql-input { width: 100%; min-height: 100px; font-family: "Consolas","Courier New",monospace; font-size: .88rem; border: 1px solid var(--border); border-radius: 8px; padding: 10px; resize: vertical; background: #f7f9fc; color: #1a1a2e; outline: none; }
+    textarea.sql-input:focus { border-color: var(--accent2); box-shadow: 0 0 0 3px rgba(11,95,165,.12); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    button.reveal { border: 0; border-radius: 8px; padding: 7px 14px; font-size: .88rem; cursor: pointer; font-weight: 600; }
+    button.btn-sol { background: #e8f4f1; color: var(--accent); }
+    button.btn-res { background: #e9f0fb; color: var(--accent2); }
+    button.reveal:hover { opacity: .85; }
+    .hidden { display: none; }
+    .sol-box { background: #f0f8f5; border: 1px solid #b0ddd1; border-radius: 8px; padding: 12px; margin-top: 10px; }
+    .sol-box pre { margin: 0; font-family: "Consolas","Courier New",monospace; font-size: .86rem; white-space: pre-wrap; word-break: break-word; color: #0d3b2e; }
+    .res-box { margin-top: 10px; overflow: auto; }
+    .res-box table { border-collapse: collapse; font-size: .86rem; min-width: 400px; }
+    .res-box th { background: #eff5fb; color: #17324b; font-weight: 700; padding: 6px 10px; border: 1px solid var(--border); text-align: left; }
+    .res-box td { padding: 5px 10px; border: 1px solid var(--border); }
+    .res-box tr:nth-child(even) td { background: #f7fafe; }
+    .row-count { font-size: .82rem; color: var(--muted); margin-top: 4px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; font-size: .9rem; }
+    .nav a { color: var(--accent2); text-decoration: none; font-weight: 600; }
+    .nav a:hover { text-decoration: underline; }
+    .legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: .84rem; margin-bottom: 14px; }
+    .legend span { padding: 3px 10px; border-radius: 12px; }
+    hr { border: 0; border-top: 1px solid var(--border); margin: 14px 0; }
+  </style>
+</head>
+<body>
+<main class="wrap">
+
+  <h1>Übungsblatt UE02 – SQL-Abfragen: Stadtfahrradverleih</h1>
+  <p class="subtitle">10 Aufgaben · Kontext: Stadtfahrradverleih (stadtfahrradverleihdb_2025) · Themen: JOIN, WHERE, AND/OR, ORDER BY, GROUP BY, HAVING, Aggregatfunktionen, Datumsfunktionen</p>
+
+  <div class="nav">
+    <a href="../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.html">📖 Stichwortverzeichnis öffnen</a>
+    <a href="UE01_foodtrucknetz_sql_abfragen.html">← Übungsblatt UE01 (FoodTruckNetz)</a>
+    <a href="README.md">← Übersicht</a>
+  </div>
+
+  <div class="legend">
+    <span class="badge easy">★☆☆ Einfach</span>
+    <span class="badge med">★★☆ Mittel</span>
+    <span class="badge hard">★★★ Anspruchsvoll</span>
+  </div>
+
+  <!-- EERM -->
+  <div class="card">
+    <h2 style="margin-top:0;color:var(--accent2);">EERM: Stadtfahrradverleih</h2>
+    <p style="color:var(--muted);font-size:.92rem;">Analysiere das Datenbankmodell sorgfältig. Besonderheit: <strong>ausleihen</strong> hat zwei Fremdschlüssel auf <code>stationen</code> (start_station_id und ziel_station_id) – du brauchst bei Abfragen dazu zwei Aliase!</p>
+    <div class="eerm-wrap">
+      <img src="../klassenarbeiten/stadtfahrradverleih_2025.png" alt="EERM Stadtfahrradverleih" loading="lazy">
+      <p class="eerm-caption">EERM Stadtfahrradverleih – stadtfahrradverleihdb_2025 (6 Entitätstypen in 3NF)</p>
+    </div>
+  </div>
+
+  <!-- Schema-Referenz -->
+  <div class="card">
+    <h3 style="margin-top:0;color:var(--accent2);">Schema-Kurzreferenz</h3>
+    <div class="schema">
+      <div class="schema-table"><strong>kunden</strong><code>kunde_id, vorname, nachname, wohnort, registriert_am, aktiv</code></div>
+      <div class="schema-table"><strong>stationen</strong><code>station_id, stationsname, stadtteil, kapazitaet, aktiv</code></div>
+      <div class="schema-table"><strong>fahrraeder</strong><code>fahrrad_id, station_id⟶stationen, typname, stundenpreis, seriennummer, zustand (verfuegbar/vermietet/wartung)</code></div>
+      <div class="schema-table"><strong>ausleihen</strong><code>ausleihe_id, kunde_id⟶kunden, fahrrad_id⟶fahrraeder, <strong>start_station_id</strong>⟶stationen, <strong>ziel_station_id</strong>⟶stationen, startzeit, endzeit, status</code></div>
+      <div class="schema-table"><strong>wartungen</strong><code>wartung_id, fahrrad_id⟶fahrraeder, wartungsdatum, wartungsart, bemerkung</code></div>
+      <div class="schema-table"><strong>zahlungen</strong><code>zahlung_id, ausleihe_id⟶ausleihen, betrag, zahlart (Karte/Lastschrift/App), bezahlt_am, zahlstatus</code></div>
+    </div>
+    <p style="font-size:.84rem;color:var(--muted);margin:0;">Datenbasis: <code>daten/stadtfahrradverleih_uebung_daten.sql</code> (21 Ausleihen, 19 Zahlungen, März–Mai 2025)</p>
+  </div>
+
+  <hr>
+
+  <!-- AUFGABE 1 -->
+  <div class="card exercise" id="a1">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 1</span>
+      <span class="badge easy">★☆☆ Einfach</span>
+      <span class="topic-badge">WHERE · JOIN · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Verfügbare Fahrräder anzeigen</strong>
+      Welche Fahrräder sind aktuell im Zustand <strong>'verfuegbar'</strong>?
+      Ausgabe: fahrrad_id, Fahrradtyp, Stundenpreis, Stationsname, Stadtteil.
+      Sortiere nach Stadtteil aufsteigend, dann nach Fahrradtyp.
+    </div>
+    <div class="hint">💡 Tipp: Du verbindest <code>fahrraeder</code> und <code>stationen</code> über <code>station_id</code>.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT f.fahrrad_id, f.typname, ...&#10;FROM fahrraeder f&#10;JOIN stationen s ...&#10;WHERE f.zustand = ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol1')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res1')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol1" class="sol-box hidden"><pre>SELECT f.fahrrad_id, f.typname, f.stundenpreis, s.stationsname, s.stadtteil
+FROM fahrraeder f
+JOIN stationen s ON s.station_id = f.station_id
+WHERE f.zustand = 'verfuegbar'
+ORDER BY s.stadtteil ASC, f.typname ASC;</pre></div>
+    <div id="res1" class="res-box hidden">
+      <table>
+        <tr><th>fahrrad_id</th><th>typname</th><th>stundenpreis</th><th>stationsname</th><th>stadtteil</th></tr>
+        <tr><td>100</td><td>City</td><td>3.50</td><td>Hauptbahnhof</td><td>Mitte</td></tr>
+        <tr><td>102</td><td>Trekking</td><td>4.20</td><td>Campus Nord</td><td>Nord</td></tr>
+        <tr><td>106</td><td>Trekking</td><td>4.20</td><td>Rathaus</td><td>Sued</td></tr>
+        <tr><td>104</td><td>E-Bike</td><td>5.80</td><td>Stadtpark</td><td>West</td></tr>
+        <tr><td>105</td><td>City</td><td>3.50</td><td>Stadtpark</td><td>West</td></tr>
+      </table>
+      <p class="row-count">5 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 2 -->
+  <div class="card exercise" id="a2">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 2</span>
+      <span class="badge easy">★☆☆ Einfach</span>
+      <span class="topic-badge">YEAR() · MONTH() · JOIN (5 Tabellen) · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Abgeschlossene Ausleihen im April 2025</strong>
+      Liste alle <em>abgeschlossenen</em> Ausleihen aus dem <strong>April 2025</strong> auf.
+      Ausgabe: Vorname, Nachname, Fahrradtyp, Startstation, Zielstation, Startzeit, Betrag.
+      Sortiere nach Startzeit aufsteigend.
+    </div>
+    <div class="hint">💡 Tipp: <code>stationen</code> wird zweimal gejoined – einmal für Start, einmal für Ziel. Vergib verschiedene Aliase (z. B. <code>s1</code> und <code>s2</code>).</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT k.vorname, ..., s1.stationsname AS startstation, s2.stationsname AS zielstation, ...&#10;FROM ausleihen a&#10;JOIN kunden k ...&#10;JOIN fahrraeder f ...&#10;JOIN stationen s1 ON s1.station_id = a.start_station_id&#10;JOIN stationen s2 ON s2.station_id = a.ziel_station_id&#10;JOIN zahlungen z ...&#10;WHERE ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol2')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res2')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol2" class="sol-box hidden"><pre>SELECT k.vorname, k.nachname, f.typname,
+       s1.stationsname AS startstation,
+       s2.stationsname AS zielstation,
+       a.startzeit, z.betrag
+FROM ausleihen a
+JOIN kunden     k  ON k.kunde_id    = a.kunde_id
+JOIN fahrraeder f  ON f.fahrrad_id  = a.fahrrad_id
+JOIN stationen  s1 ON s1.station_id = a.start_station_id
+JOIN stationen  s2 ON s2.station_id = a.ziel_station_id
+JOIN zahlungen  z  ON z.ausleihe_id = a.ausleihe_id
+WHERE a.status = 'abgeschlossen'
+  AND YEAR(a.startzeit)  = 2025
+  AND MONTH(a.startzeit) = 4
+ORDER BY a.startzeit ASC;</pre></div>
+    <div id="res2" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>typname</th><th>startstation</th><th>zielstation</th><th>startzeit</th><th>betrag</th></tr>
+        <tr><td>Mia</td><td>Schmidt</td><td>Trekking</td><td>Campus Nord</td><td>Hauptbahnhof</td><td>2025-04-01 07:30:00</td><td>5.00</td></tr>
+        <tr><td>Elias</td><td>Nguyen</td><td>E-Bike</td><td>Stadtpark</td><td>Campus Nord</td><td>2025-04-02 10:00:00</td><td>7.25</td></tr>
+        <tr><td>Lea</td><td>Keller</td><td>Trekking</td><td>Rathaus</td><td>Stadtpark</td><td>2025-04-03 08:15:00</td><td>3.15</td></tr>
+        <tr><td>Noah</td><td>Weber</td><td>City</td><td>Stadtpark</td><td>Hauptbahnhof</td><td>2025-04-04 09:30:00</td><td>5.25</td></tr>
+        <tr><td>Lina</td><td>Bauer</td><td>City</td><td>Hauptbahnhof</td><td>Campus Nord</td><td>2025-04-05 11:00:00</td><td>3.50</td></tr>
+        <tr><td>Paul</td><td>Hoffmann</td><td>Trekking</td><td>Campus Nord</td><td>Rathaus</td><td>2025-04-06 12:00:00</td><td>5.00</td></tr>
+      </table>
+      <p class="row-count">6 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 3 -->
+  <div class="card exercise" id="a3">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 3</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">COUNT · GROUP BY · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Anzahl abgeschlossener Ausleihen je Fahrradtyp</strong>
+      Wie oft wurde jeder Fahrradtyp bei abgeschlossenen Ausleihen eingesetzt?
+      Ausgabe: Typname, Anzahl Ausleihen.
+      Sortiere absteigend nach Anzahl.
+    </div>
+    <div class="hint">💡 Tipp: Verbinde <code>fahrraeder</code> mit <code>ausleihen</code>. Filtere auf <code>status = 'abgeschlossen'</code> bevor du gruppierst.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT f.typname, COUNT(...) AS ...&#10;FROM fahrraeder f&#10;JOIN ausleihen a ...&#10;WHERE ...&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol3')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res3')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol3" class="sol-box hidden"><pre>SELECT f.typname, COUNT(a.ausleihe_id) AS anzahl_ausleihen
+FROM fahrraeder f
+JOIN ausleihen a ON a.fahrrad_id = f.fahrrad_id
+WHERE a.status = 'abgeschlossen'
+GROUP BY f.typname
+ORDER BY anzahl_ausleihen DESC;</pre></div>
+    <div id="res3" class="res-box hidden">
+      <table>
+        <tr><th>typname</th><th>anzahl_ausleihen</th></tr>
+        <tr><td>City</td><td>8</td></tr>
+        <tr><td>Trekking</td><td>7</td></tr>
+        <tr><td>E-Bike</td><td>4</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 4 -->
+  <div class="card exercise" id="a4">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 4</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">SUM · COUNT · GROUP BY · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Gesamtumsatz und Anzahl je Zahlart</strong>
+      Berechne für jede Zahlart die Anzahl der Zahlungen und den Gesamtbetrag aller bezahlten Transaktionen.
+      Sortiere absteigend nach Gesamtumsatz.
+    </div>
+    <div class="hint">💡 Tipp: Hier reicht eine einzige Tabelle <code>zahlungen</code>. Filtere auf <code>status = 'bezahlt'</code>.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT zahlart, COUNT(*) AS ..., SUM(betrag) AS ...&#10;FROM zahlungen&#10;WHERE ...&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol4')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res4')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol4" class="sol-box hidden"><pre>SELECT zahlart,
+       COUNT(*)    AS anzahl_zahlungen,
+       SUM(betrag) AS gesamtumsatz
+FROM zahlungen
+WHERE status = 'bezahlt'
+GROUP BY zahlart
+ORDER BY gesamtumsatz DESC;</pre></div>
+    <div id="res4" class="res-box hidden">
+      <table>
+        <tr><th>zahlart</th><th>anzahl_zahlungen</th><th>gesamtumsatz</th></tr>
+        <tr><td>Karte</td><td>8</td><td>37.20</td></tr>
+        <tr><td>App</td><td>7</td><td>31.65</td></tr>
+        <tr><td>Lastschrift</td><td>4</td><td>26.45</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 5 -->
+  <div class="card exercise" id="a5">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 5</span>
+      <span class="badge med">★★☆ Mittel</span>
+      <span class="topic-badge">COUNT · GROUP BY · HAVING · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Beliebte Startstationen (HAVING)</strong>
+      Welche Stationen wurden bei abgeschlossenen Ausleihen als <strong>Startpunkt mehr als 3-mal</strong> genutzt?
+      Ausgabe: Stationsname, Stadtteil, Anzahl Abfahrten.
+      Sortiere absteigend nach Anzahl.
+    </div>
+    <div class="hint">💡 Tipp: Verbinde <code>stationen</code> mit <code>ausleihen</code> über <code>start_station_id</code>. Dann HAVING COUNT &gt; 3.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT s.stationsname, s.stadtteil, COUNT(a.ausleihe_id) AS ...&#10;FROM stationen s&#10;JOIN ausleihen a ON a.start_station_id = s.station_id&#10;WHERE ...&#10;GROUP BY ...&#10;HAVING ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol5')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res5')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol5" class="sol-box hidden"><pre>SELECT s.stationsname, s.stadtteil, COUNT(a.ausleihe_id) AS anzahl_abfahrten
+FROM stationen s
+JOIN ausleihen a ON a.start_station_id = s.station_id
+WHERE a.status = 'abgeschlossen'
+GROUP BY s.station_id, s.stationsname, s.stadtteil
+HAVING COUNT(a.ausleihe_id) > 3
+ORDER BY anzahl_abfahrten DESC;</pre></div>
+    <div id="res5" class="res-box hidden">
+      <table>
+        <tr><th>stationsname</th><th>stadtteil</th><th>anzahl_abfahrten</th></tr>
+        <tr><td>Hauptbahnhof</td><td>Mitte</td><td>6</td></tr>
+        <tr><td>Stadtpark</td><td>West</td><td>6</td></tr>
+        <tr><td>Rathaus</td><td>Sued</td><td>4</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen (Campus Nord mit 3 Abfahrten fällt heraus)</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 6 -->
+  <div class="card exercise" id="a6">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 6</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">COUNT · GROUP BY · HAVING · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Stammkunden mit mindestens 3 Ausleihen</strong>
+      Welche Kunden haben <strong>mindestens 3 abgeschlossene Ausleihen</strong> getätigt?
+      Ausgabe: Vorname, Nachname, Wohnort, Anzahl Ausleihen.
+      Sortiere absteigend nach Anzahl, dann alphabetisch nach Nachname.
+    </div>
+    <div class="hint">💡 Tipp: HAVING COUNT(...) &gt;= 3 filtert hier die Gruppen. Mia Schmidt (2 Ausleihen) soll <strong>nicht</strong> erscheinen.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT k.vorname, k.nachname, k.wohnort, COUNT(a.ausleihe_id) AS ...&#10;FROM kunden k&#10;JOIN ausleihen a ...&#10;WHERE ...&#10;GROUP BY ...&#10;HAVING ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol6')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res6')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol6" class="sol-box hidden"><pre>SELECT k.vorname, k.nachname, k.wohnort, COUNT(a.ausleihe_id) AS anzahl_ausleihen
+FROM kunden k
+JOIN ausleihen a ON a.kunde_id = k.kunde_id
+WHERE a.status = 'abgeschlossen'
+GROUP BY k.kunde_id, k.vorname, k.nachname, k.wohnort
+HAVING COUNT(a.ausleihe_id) >= 3
+ORDER BY anzahl_ausleihen DESC, k.nachname ASC;</pre></div>
+    <div id="res6" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>wohnort</th><th>anzahl_ausleihen</th></tr>
+        <tr><td>Lea</td><td>Keller</td><td>Mitte</td><td>5</td></tr>
+        <tr><td>Lina</td><td>Bauer</td><td>Mitte</td><td>3</td></tr>
+        <tr><td>Paul</td><td>Hoffmann</td><td>Nord</td><td>3</td></tr>
+        <tr><td>Elias</td><td>Nguyen</td><td>Sued</td><td>3</td></tr>
+        <tr><td>Noah</td><td>Weber</td><td>Nord</td><td>3</td></tr>
+      </table>
+      <p class="row-count">5 Zeilen (Mia Schmidt mit 2 Ausleihen erscheint nicht)</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 7 -->
+  <div class="card exercise" id="a7">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 7</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">MONTH() · GROUP BY · COUNT · SUM · AVG</span>
+    </div>
+    <div class="task">
+      <strong>Monatliche Umsatzauswertung 2025</strong>
+      Erstelle eine monatliche Übersicht (2025) mit: Monatsnummer, Anzahl Zahlungen,
+      Gesamtumsatz und Durchschnittsbetrag (auf 2 Stellen gerundet).
+      Sortiere nach Monat aufsteigend.
+    </div>
+    <div class="hint">💡 Tipp: Nutze <code>YEAR(bezahlt_am) = 2025</code> als Filter und <code>MONTH(bezahlt_am)</code> für die Gruppierung.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT MONTH(z.bezahlt_am) AS monat, COUNT(*) AS ..., SUM(betrag) AS ..., ROUND(AVG(betrag),2) AS ...&#10;FROM zahlungen z&#10;WHERE ...&#10;GROUP BY MONTH(...)&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol7')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res7')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol7" class="sol-box hidden"><pre>SELECT MONTH(bezahlt_am)      AS monat,
+       COUNT(zahlung_id)       AS anzahl_zahlungen,
+       SUM(betrag)             AS gesamtumsatz,
+       ROUND(AVG(betrag), 2)  AS durchschnitt
+FROM zahlungen
+WHERE status = 'bezahlt'
+  AND YEAR(bezahlt_am) = 2025
+GROUP BY MONTH(bezahlt_am)
+ORDER BY monat ASC;</pre></div>
+    <div id="res7" class="res-box hidden">
+      <table>
+        <tr><th>monat</th><th>anzahl_zahlungen</th><th>gesamtumsatz</th><th>durchschnitt</th></tr>
+        <tr><td>3</td><td>6</td><td>36.40</td><td>6.07</td></tr>
+        <tr><td>4</td><td>6</td><td>29.15</td><td>4.86</td></tr>
+        <tr><td>5</td><td>7</td><td>29.75</td><td>4.25</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 8 -->
+  <div class="card exercise" id="a8">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 8</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">LEFT JOIN · IS NULL · WHERE</span>
+    </div>
+    <div class="task">
+      <strong>Fahrräder ohne dokumentierte Wartung</strong>
+      Welche Fahrräder haben <strong>noch keine</strong> Wartung in der Tabelle <code>wartungen</code>?
+      Ausgabe: fahrrad_id, Typ, Seriennummer, Stationsname.
+      Sortiere nach fahrrad_id.
+    </div>
+    <div class="hint">💡 Tipp: Ein LEFT JOIN liefert alle Fahrräder – auch wenn kein Wartungs-Datensatz existiert. Prüfe dann mit <code>WHERE w.wartung_id IS NULL</code>.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT f.fahrrad_id, f.typname, f.seriennummer, s.stationsname&#10;FROM fahrraeder f&#10;LEFT JOIN wartungen w ON w.fahrrad_id = f.fahrrad_id&#10;JOIN stationen s ...&#10;WHERE w.wartung_id IS NULL&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol8')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res8')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol8" class="sol-box hidden"><pre>SELECT f.fahrrad_id, f.typname, f.seriennummer, s.stationsname
+FROM fahrraeder f
+LEFT JOIN wartungen w ON w.fahrrad_id  = f.fahrrad_id
+JOIN      stationen s ON s.station_id  = f.station_id
+WHERE w.wartung_id IS NULL
+ORDER BY f.fahrrad_id ASC;</pre></div>
+    <div id="res8" class="res-box hidden">
+      <table>
+        <tr><th>fahrrad_id</th><th>typname</th><th>seriennummer</th><th>stationsname</th></tr>
+        <tr><td>102</td><td>Trekking</td><td>SN-T-102</td><td>Campus Nord</td></tr>
+        <tr><td>105</td><td>City</td><td>SN-C-105</td><td>Stadtpark</td></tr>
+        <tr><td>106</td><td>Trekking</td><td>SN-T-106</td><td>Rathaus</td></tr>
+      </table>
+      <p class="row-count">3 Zeilen (Fahrräder 100, 101, 103, 104, 107 haben Wartungseinträge)</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 9 -->
+  <div class="card exercise" id="a9">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 9</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">AVG · GROUP BY · JOIN (3 Tabellen) · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Ø Zahlbetrag je Stadtteil der Startstation</strong>
+      Berechne den durchschnittlichen Zahlbetrag je <strong>Stadtteil der Startstation</strong>.
+      Ausgabe: Stadtteil, Durchschnittsbetrag (2 Stellen), Anzahl Zahlungen.
+      Sortiere absteigend nach Durchschnittsbetrag.
+    </div>
+    <div class="hint">💡 Tipp: Du brauchst 3 Tabellen: <code>zahlungen → ausleihen → stationen</code>. Verknüpfe <code>stationen</code> über <code>a.start_station_id</code>.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT s.stadtteil, ROUND(AVG(z.betrag),2) AS ..., COUNT(z.zahlung_id) AS ...&#10;FROM zahlungen z&#10;JOIN ausleihen a ON a.ausleihe_id = z.ausleihe_id&#10;JOIN stationen s ON s.station_id = a.start_station_id&#10;WHERE ...&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol9')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res9')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol9" class="sol-box hidden"><pre>SELECT s.stadtteil,
+       ROUND(AVG(z.betrag), 2) AS durchschnitt,
+       COUNT(z.zahlung_id)     AS anzahl
+FROM zahlungen z
+JOIN ausleihen a ON a.ausleihe_id = z.ausleihe_id
+JOIN stationen s ON s.station_id  = a.start_station_id
+WHERE z.status = 'bezahlt'
+GROUP BY s.stadtteil
+ORDER BY durchschnitt DESC;</pre></div>
+    <div id="res9" class="res-box hidden">
+      <table>
+        <tr><th>stadtteil</th><th>durchschnitt</th><th>anzahl</th></tr>
+        <tr><td>West</td><td>6.67</td><td>6</td></tr>
+        <tr><td>Nord</td><td>5.00</td><td>3</td></tr>
+        <tr><td>Mitte</td><td>4.62</td><td>6</td></tr>
+        <tr><td>Sued</td><td>3.15</td><td>4</td></tr>
+      </table>
+      <p class="row-count">4 Zeilen</p>
+    </div>
+  </div>
+
+  <!-- AUFGABE 10 -->
+  <div class="card exercise" id="a10">
+    <div class="ex-header">
+      <span class="ex-num">Aufgabe 10</span>
+      <span class="badge hard">★★★ Anspruchsvoll</span>
+      <span class="topic-badge">MAX · MIN · COUNT · GROUP BY · ORDER BY</span>
+    </div>
+    <div class="task">
+      <strong>Zahlungsanalyse je Kunde (MAX, MIN, COUNT)</strong>
+      Erstelle für jeden Kunden (mit mindestens einer Zahlung) eine Zahlungsübersicht:
+      Höchster Betrag, niedrigster Betrag, Anzahl der Zahlungen.
+      Sortiere absteigend nach Höchstbetrag, dann alphabetisch nach Nachname.
+    </div>
+    <div class="hint">💡 Tipp: Verbinde <code>kunden → ausleihen → zahlungen</code>. MAX, MIN und COUNT gelten jeweils pro Kundengruppe.</div>
+    <p class="sql-label">Dein SQL-Entwurf:</p>
+    <textarea class="sql-input" placeholder="SELECT k.vorname, k.nachname, MAX(z.betrag) AS ..., MIN(z.betrag) AS ..., COUNT(z.zahlung_id) AS ...&#10;FROM kunden k&#10;JOIN ausleihen a ...&#10;JOIN zahlungen z ...&#10;WHERE ...&#10;GROUP BY ...&#10;ORDER BY ..."></textarea>
+    <div class="btn-row">
+      <button class="reveal btn-sol" onclick="toggle('sol10')">✔ Musterlösung</button>
+      <button class="reveal btn-res" onclick="toggle('res10')">📋 Erwartetes Ergebnis</button>
+    </div>
+    <div id="sol10" class="sol-box hidden"><pre>SELECT k.vorname, k.nachname,
+       MAX(z.betrag) AS hoechstbetrag,
+       MIN(z.betrag) AS niedrigstbetrag,
+       COUNT(z.zahlung_id) AS anzahl_zahlungen
+FROM kunden k
+JOIN ausleihen a ON a.kunde_id    = k.kunde_id
+JOIN zahlungen z ON z.ausleihe_id = a.ausleihe_id
+WHERE z.status = 'bezahlt'
+GROUP BY k.kunde_id, k.vorname, k.nachname
+ORDER BY hoechstbetrag DESC, k.nachname ASC;</pre></div>
+    <div id="res10" class="res-box hidden">
+      <table>
+        <tr><th>vorname</th><th>nachname</th><th>hoechstbetrag</th><th>niedrigstbetrag</th><th>anzahl_zahlungen</th></tr>
+        <tr><td>Lea</td><td>Keller</td><td>8.70</td><td>3.15</td><td>5</td></tr>
+        <tr><td>Elias</td><td>Nguyen</td><td>7.25</td><td>3.50</td><td>3</td></tr>
+        <tr><td>Mia</td><td>Schmidt</td><td>7.25</td><td>5.00</td><td>2</td></tr>
+        <tr><td>Noah</td><td>Weber</td><td>5.80</td><td>5.25</td><td>3</td></tr>
+        <tr><td>Paul</td><td>Hoffmann</td><td>5.00</td><td>4.50</td><td>3</td></tr>
+        <tr><td>Lina</td><td>Bauer</td><td>4.20</td><td>2.10</td><td>3</td></tr>
+      </table>
+      <p class="row-count">6 Zeilen</p>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('hidden');
+  const btn = document.querySelector(`button[onclick="toggle('${id}')"]`);
+  if (btn) btn.textContent = el.classList.contains('hidden')
+    ? (id.startsWith('sol') ? '✔ Musterlösung' : '📋 Erwartetes Ergebnis')
+    : (id.startsWith('sol') ? '✖ Musterlösung verbergen' : '✖ Ergebnis verbergen');
+}
+</script>
+</body>
+</html>

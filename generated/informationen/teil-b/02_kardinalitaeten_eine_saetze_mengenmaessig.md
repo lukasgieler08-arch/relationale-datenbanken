@@ -57,3 +57,6 @@ Aufgabe:
 1. Formuliere zwei Eine-Sätze.
 2. Bestimme die Kardinalität.
 3. Begründe kurz.
+
+## Begriffshilfe
+- [Stichwortverzeichnis Relationale Datenbanken](../begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)

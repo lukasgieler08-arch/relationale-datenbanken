@@ -3,10 +3,8 @@ build/
 __pycache__/
 *.pyc
 
-# Upload-Verzeichnisse: Inhalte nur lokal, nicht ins Repo
-uploads/klassenarbeiten-und-unterrichtsmaterialien/*
-!uploads/klassenarbeiten-und-unterrichtsmaterialien/.gitkeep
-uploads/lehrplaene/*
-!uploads/lehrplaene/.gitkeep
-uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/*
-!uploads/pruefungsaufgaben-und-erwartungshorizonte-fuer-ki-training/.gitkeep
+# Upload-Verzeichnis: komplett lokal, nicht versionieren und nicht in Templates uebernehmen
+uploads/
+
+# Lokale Loesungsablaeufe: nicht versionieren und nicht in Templates uebernehmen
+src/ka_loesungen/

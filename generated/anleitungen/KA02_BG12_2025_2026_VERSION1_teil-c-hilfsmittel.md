@@ -9,6 +9,8 @@ Diese Anleitung führt dich von der Aufgabenstellung über das Schema bis zur Ab
 - [Teil C: Abfragen über mehrere Tabellen](../informationen/teil-c/01_sql_abfragen_ueber_mehrere_tabellen.md)
 - [Teil C: Selektion in SQL](../informationen/teil-c/03_selektion_in_sql.md)
 - [Teil C: Gruppierung in SQL](../informationen/teil-c/06_gruppierung_in_sql.md)
+- [Stichwortverzeichnis Relationale Datenbanken](../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.md)
+- [Stichwortverzeichnis (suchbare HTML-Ansicht)](../informationen/begrifflichkeiten/stichwortverzeichnis_relationale_datenbanken.html)
 
 ## 1. Zuerst das Schema lesen
 
